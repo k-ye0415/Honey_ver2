@@ -2,6 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ioad.honey">
 
+    <!-- 주소 API를 위한 권한  -->
+<!--    <uses-sdk tools:overrideLibrary="com.gomcorp.vrix.android" />-->
+
+    <!-- 문자 인증을 위한권한 -->
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +23,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Honey">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:theme="@style/SplashTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
