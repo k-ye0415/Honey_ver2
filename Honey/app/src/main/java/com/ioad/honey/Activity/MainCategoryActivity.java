@@ -75,6 +75,30 @@ public class MainCategoryActivity extends AppCompatActivity {
                         tab.setIcon(android.R.drawable.ic_btn_speak_now);
                         tab.setText("HOME");
                         break;
+                    case 1:
+                        tab.setIcon(android.R.drawable.ic_btn_speak_now);
+                        tab.setText("한식");
+                        break;
+                    case 2:
+                        tab.setIcon(android.R.drawable.ic_btn_speak_now);
+                        tab.setText("분식");
+                        break;
+                    case 3:
+                        tab.setIcon(android.R.drawable.ic_btn_speak_now);
+                        tab.setText("탕");
+                        break;
+                    case 4:
+                        tab.setIcon(android.R.drawable.ic_btn_speak_now);
+                        tab.setText("인스턴트");
+                        break;
+                    case 5:
+                        tab.setIcon(android.R.drawable.ic_btn_speak_now);
+                        tab.setText("디저트");
+                        break;
+                    case 6:
+                        tab.setIcon(android.R.drawable.ic_btn_speak_now);
+                        tab.setText("채식");
+                        break;
                 }
             }
         }).attach();

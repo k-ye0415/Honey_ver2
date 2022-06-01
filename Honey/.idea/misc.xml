@@ -3,9 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/button_add_custom.xml" value="0.301025641025641" />
+        <entry key="app/src/main/res/drawable/menu_layout_list_coustom.xml" value="0.301025641025641" />
+        <entry key="app/src/main/res/drawable/search_background_custom.xml" value="0.301025641025641" />
+        <entry key="app/src/main/res/drawable/search_edit_custom.xml" value="0.301025641025641" />
+        <entry key="app/src/main/res/drawable/textview_custom.xml" value="0.301025641025641" />
+        <entry key="app/src/main/res/drawable/tip_btn_left_custom.xml" value="0.301025641025641" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16576086956521738" />
         <entry key="app/src/main/res/layout/activity_main_category.xml" value="0.2866847826086957" />
+        <entry key="app/src/main/res/layout/activity_select_menu.xml" value="0.2755208333333333" />
+        <entry key="app/src/main/res/layout/activity_tip.xml" value="0.2755208333333333" />
+        <entry key="app/src/main/res/layout/dashborad_page.xml" value="0.28396739130434784" />
+        <entry key="app/src/main/res/layout/fragment_all_menu.xml" value="0.28396739130434784" />
+        <entry key="app/src/main/res/layout/fragment_korean.xml" value="0.2755208333333333" />
+        <entry key="app/src/main/res/layout/fragment_school_food.xml" value="0.28396739130434784" />
+        <entry key="app/src/main/res/layout/menu_layout.xml" value="0.28396739130434784" />
+        <entry key="app/src/main/res/layout/menu_select_list_layout.xml" value="0.28396739130434784" />
+        <entry key="app/src/main/res/layout/tip_item.xml" value="0.28396739130434784" />
         <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.28958333333333336" />
+        <entry key="app/src/main/res/xml/network_security_config.xml" value="0.28396739130434784" />
       </map>
     </option>
   </component>
