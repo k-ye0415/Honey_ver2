@@ -45,7 +45,7 @@ public class TipActivity extends AppCompatActivity {
         rv_tip_list = findViewById(R.id.rv_tip_list);
         btn_tip_add = findViewById(R.id.btn_tip_add);
 
-
+        // 값받아오기
         Intent intent = getIntent();
         selectCode = intent.getStringExtra("mCode");
         selectName = intent.getStringExtra("mName");
