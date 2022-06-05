@@ -33,6 +33,14 @@ public class Shared {
         editor.commit();
     }
 
+    public static void setStringPrf(Context context, String key, String value) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+
     public static void removeStringArrayPref(Context context, String key) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();
@@ -67,5 +75,11 @@ public class Shared {
             }
         }
         return urls;
+    }
+
+    public static String getStringPref(Context context, String key) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String str = preferences.getString(key, "");
+        return str;
     }
 }

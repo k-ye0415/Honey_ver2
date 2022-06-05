@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.ioad.honey.Adapter.TabPagerAdapter;
 import com.ioad.honey.R;
+import com.ioad.honey.common.Shared;
 
 public class MainCategoryActivity extends AppCompatActivity {
 
@@ -33,6 +35,7 @@ public class MainCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_category);
 
         mContext = getApplicationContext();
+        Log.e("TAG", "user ID ::::: " + Shared.getStringPref(mContext, "USER_ID"));
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         tabLayout = findViewById(R.id.tab_layout);
@@ -44,6 +47,8 @@ public class MainCategoryActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.tab_cart:
                         Toast.makeText(mContext, "tab_cart", Toast.LENGTH_SHORT).show();
+                        Intent intent1 = new Intent(mContext, LoginActivity.class);
+                        startActivity(intent1);
                         break;
                     case R.id.tab_buyHistory:
                         Toast.makeText(mContext, "tab_buyHistory", Toast.LENGTH_SHORT).show();
