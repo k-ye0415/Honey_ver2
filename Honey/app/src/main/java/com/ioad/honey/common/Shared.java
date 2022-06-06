@@ -44,20 +44,29 @@ public class Shared {
     public static void removeStringArrayPref(Context context, String key) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();
-        String json = preferences.getString("SELECT_CODE", "");
-        if (json != null) {
-            try {
-                JSONArray array = new JSONArray(json);
-                for (int i = 0; i < array.length(); i++) {
-
-                }
-            } catch (JSONException e){
-                e.printStackTrace();
-            }
-        }
-//                    editor.remove("SELECT_NAME");
-//                    editor.commit();
+//        String json = preferences.getString(key, "");
+//        if (json != null) {
+//            try {
+//                JSONArray array = new JSONArray(json);
+//                for (int i = 0; i < array.length(); i++) {
+//                    editor.remove(i);
+//                    Log.e("TAG", array.toString());
+//                }
+//            } catch (JSONException e){
+//                e.printStackTrace();
+//            }
+//        }
+                    editor.remove(key);
+                    editor.commit();
     }
+
+    public static void removeStringPrf(Context context, String key) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(key);
+        editor.commit();
+    }
+
 
     public static ArrayList<String> getStringArrayPref(Context context, String key) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);

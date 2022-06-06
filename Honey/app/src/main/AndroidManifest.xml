@@ -21,6 +21,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Honey">
         <activity
+            android:name=".Activity.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DaumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.JoinAddrActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.JoinActivity"
             android:exported="false" />
         <activity

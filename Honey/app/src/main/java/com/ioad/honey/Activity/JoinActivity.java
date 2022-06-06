@@ -2,18 +2,22 @@ package com.ioad.honey.Activity;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.ioad.honey.Fragment.JoinAddrFragment;
+import com.ioad.honey.Fragment.JoinElseFragment;
 import com.ioad.honey.Fragment.JoinFragment;
+import com.ioad.honey.Fragment.TOSFragment;
 import com.ioad.honey.R;
 
 public class JoinActivity extends FragmentActivity {
 
-//    Button btnJoinNext;
+    TOSFragment tosFragment;
     JoinFragment joinFragment;
     JoinAddrFragment joinAddrFragment;
+    JoinElseFragment joinElseFragment;
     int pageIndex = 1;
 
     @Override
@@ -21,43 +25,44 @@ public class JoinActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
-//        btnJoinNext = findViewById(R.id.btn_next);
+        tosFragment = new TOSFragment();
         joinFragment = new JoinFragment();
         joinAddrFragment = new JoinAddrFragment();
-
-
-//        btnJoinNext.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (pageIndex == 1) {
-//                    Toast.makeText(getApplicationContext(), "중복확인", Toast.LENGTH_SHORT).show();
-//                    pageIndex++;
-//                    changeFragment(pageIndex);
-//                } else if (pageIndex == 2) {
-//                    Toast.makeText(getApplicationContext(), "주소", Toast.LENGTH_SHORT).show();
-//                    changeFragment(1);
-//                }
-//            }
-//        });
+        joinElseFragment = new JoinElseFragment();
 
     }
 
     public void changeFragment(int index) {
         switch (index) {
             case 1:
-                getSupportFragmentManager().beginTransaction().replace(R.id.frg_join, joinFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frg_join, tosFragment).commit();
                 break;
             case 2:
-                getSupportFragmentManager().beginTransaction().remove(joinFragment).commit();
-                getSupportFragmentManager().beginTransaction().replace(R.id.frg_join, joinAddrFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frg_join, joinFragment).commit();
+//                getSupportFragmentManager().beginTransaction().remove(joinFragment).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.frg_join, joinAddrFragment).commit();
                 break;
+            case 3:
+                getSupportFragmentManager().beginTransaction().remove(joinFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frg_join, joinElseFragment).commit();
+                break;
+
         }
     }
 
-    public void checkJoin(String id, String pw) {
-        Log.d("TAG", "user Id ::: " + id);
-        Log.d("TAG", "user pw ::: " + pw);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("TAG", "onResume pageIndex " + pageIndex);
+        Intent intent = getIntent();
+        int intentInt = intent.getIntExtra("PAGE_INDEX", 1);
+        if (intentInt == 1) {
+            changeFragment(pageIndex);
+        } else {
+            Log.e("TAG", "onResume intent " + intentInt);
+            pageIndex = intentInt;
+            changeFragment(pageIndex);
+        }
+
     }
-
-
 }

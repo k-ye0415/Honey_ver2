@@ -1,16 +1,25 @@
 package com.ioad.honey.Adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ioad.honey.Bean.Tip;
 import com.ioad.honey.R;
+import com.ioad.honey.Task.DeleteNetworkTask;
+import com.ioad.honey.common.Constant;
+import com.ioad.honey.common.Shared;
 
 import java.util.ArrayList;
 
@@ -21,12 +30,18 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
     private LayoutInflater inflater;
 
     String tipCode;
+    String userId, userName;
+    Dialog deleteDialog;
+    TextView tvDeleteContent;
+    Button btnDelete, btnCancel;
+    String url;
 
 
     public TipAdapter(Context mContext, int layout, ArrayList<Tip> tips) {
         this.mContext = mContext;
         this.layout = layout;
         this.tips = tips;
+        this.userId = Shared.getStringPref(mContext, "USER_ID");
     }
 
     @NonNull
@@ -42,6 +57,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
         String id = tips.get(position).getcId().substring(0,2) + "***";
         String name = tips.get(position).getcName().substring(0,1) + "***";
 
+        userName = tips.get(position).getcName();
         holder.tv_tip_id.setText(id);
         holder.tv_tip_name.setText(name);
         holder.tv_tip_title.setText(tips.get(position).getTipContent());
@@ -69,13 +85,69 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
                     String id = tips.get(getAdapterPosition()).getcId();
                     tipCode = tips.get(getAdapterPosition()).getTipCode();
 
+                    if (id.equals(userId)) {
+                        deleteDialog = new Dialog(view.getContext());
+                        deleteDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        deleteDialog.setContentView(R.layout.tip_delete_dialog);
 
+                        WindowManager.LayoutParams lbDown = new WindowManager.LayoutParams();
+                        lbDown.copyFrom(deleteDialog.getWindow().getAttributes());
+                        lbDown.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                        lbDown.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+                        Window window = deleteDialog.getWindow();
+                        window.setAttributes(lbDown);
+
+                        deleteDialog.show();
+                        tvDeleteContent = deleteDialog.findViewById(R.id.tv_dialog_delete_content);
+                        btnCancel = deleteDialog.findViewById(R.id.btn_dialog_cancel);
+                        btnDelete = deleteDialog.findViewById(R.id.btn_dialog_delete);
+
+                        tvDeleteContent.setText("정말 삭제 하실껀가요..? \n다른 분들도 " + userName + "님의 꿀팁 궁금해할텐데..?");
+
+                        btnCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                deleteDialog.dismiss();
+                            }
+                        });
+
+                        btnDelete.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String result = tipDeleted();
+                                if (result.equals("1")) {
+//                                    deleteOnClickListener.onDeleteClickListener(true);
+                                    Toast.makeText(mContext, "꿀재료는 꿀팁을 사랑하지만, 삭제 완료", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(mContext, "아싸 삭제 실패!", Toast.LENGTH_SHORT).show();
+                                }
+                                deleteDialog.dismiss();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(mContext, "내가 쓴 꿀팁만 삭제 가능해요!", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
             });
 
         }
 
+    }
+
+    private String tipDeleted() {
+        url = Constant.SERVER_URL_JSP + "tip_delete.jsp?code=" + tipCode;
+        String result = null;
+        try {
+            DeleteNetworkTask networkTask = new DeleteNetworkTask(mContext, url, "delete");
+            Object obj = networkTask.execute().get();
+            result = (String)obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.v("result", result);
+        return result;
     }
 
 }

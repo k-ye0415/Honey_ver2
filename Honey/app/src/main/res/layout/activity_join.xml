@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,11 +8,11 @@
     android:layout_height="match_parent"
     tools:context=".Activity.JoinActivity">
 
-    <fragment
+    <FrameLayout
         android:id="@+id/frg_join"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.ioad.honey.Fragment.JoinFragment"
+
         />
 <!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->
@@ -30,4 +30,4 @@
 <!--            />-->
 <!--    </LinearLayout>-->
 
-</FrameLayout>
+</LinearLayout>

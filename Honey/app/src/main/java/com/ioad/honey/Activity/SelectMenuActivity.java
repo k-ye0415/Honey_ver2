@@ -12,12 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ioad.honey.Adapter.IngredientAdapter;
 import com.ioad.honey.Adapter.MenuRecyclerAdapter;
 import com.ioad.honey.Bean.Ingredient;
 import com.ioad.honey.R;
 import com.ioad.honey.Task.ImageLoadTask;
+import com.ioad.honey.Task.InsertNetworkTask;
 import com.ioad.honey.Task.SelectNetworkTask;
 import com.ioad.honey.common.Constant;
 import com.ioad.honey.common.Shared;
@@ -41,11 +43,14 @@ public class SelectMenuActivity extends AppCompatActivity {
     SharedPreferences preferences;
 
     String url;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_menu);
+
+        userId = Shared.getStringPref(SelectMenuActivity.this, "USER_ID");
 
         iv_select_menu = findViewById(R.id.iv_select_menu);
         tv_select_name = findViewById(R.id.tv_select_name);
@@ -91,13 +96,26 @@ public class SelectMenuActivity extends AppCompatActivity {
     View.OnClickListener cartOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            String result = null;
             ArrayList<String> codeArr = new ArrayList<>();
             ArrayList<String> nameArr = new ArrayList<>();
             codeArr = Shared.getStringArrayPref(SelectMenuActivity.this, "SELECT_CODE");
             nameArr = Shared.getStringArrayPref(SelectMenuActivity.this, "SELECT_NAME");
             // Login 부터하자
             for (int i = 0; i < codeArr.size(); i++) {
-                url = Constant.SERVER_URL_JSP + "ingredient_cart_insert.jsp?id=";
+                url = Constant.SERVER_URL_JSP + "ingredient_cart_insert.jsp?id=" + userId + "&iCode=" + codeArr.get(i) + "&mCode=" + selectCode;
+                Log.d("TAG", "cart Insert url : " + url);
+                result = insertCart();
+            }
+
+            if (result.equals("1")) {
+                if (codeArr.size() == 1) {
+                    Toast.makeText(SelectMenuActivity.this, "장바구니 담기 완료", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SelectMenuActivity.this, nameArr.get(0) + "외 " + codeArr.size() + "장바구니 담기 완료", Toast.LENGTH_SHORT).show();
+                }
+                Shared.removeStringArrayPref(SelectMenuActivity.this, "SELECT_CODE");
+                Shared.removeStringArrayPref(SelectMenuActivity.this, "SELECT_NAME");
             }
 
         }
@@ -143,6 +161,19 @@ public class SelectMenuActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private String insertCart() {
+        String result = null;
+        try {
+            InsertNetworkTask task = new InsertNetworkTask(SelectMenuActivity.this, url, "insert");
+            Object obj = task.execute().get();
+            result = (String) obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 

@@ -28,6 +28,7 @@ public class MainCategoryActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager;
     TabPagerAdapter tabPagerAdapter;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_category);
 
         mContext = getApplicationContext();
+        userId = Shared.getStringPref(mContext, "USER_ID");
         Log.e("TAG", "user ID ::::: " + Shared.getStringPref(mContext, "USER_ID"));
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -46,15 +48,20 @@ public class MainCategoryActivity extends AppCompatActivity {
                 Intent intent = null;
                 switch (item.getItemId()) {
                     case R.id.tab_cart:
-                        Toast.makeText(mContext, "tab_cart", Toast.LENGTH_SHORT).show();
-                        Intent intent1 = new Intent(mContext, LoginActivity.class);
-                        startActivity(intent1);
+                        if (userId.length() == 0) {
+                            Toast.makeText(mContext, "로그인 해주세요!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            intent = new Intent(mContext, CartActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.tab_buyHistory:
                         Toast.makeText(mContext, "tab_buyHistory", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.tab_mypage:
                         Toast.makeText(mContext, "tab_mypage", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(mContext, LoginActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.tab_search:
                         Toast.makeText(mContext, "tab_search", Toast.LENGTH_SHORT).show();

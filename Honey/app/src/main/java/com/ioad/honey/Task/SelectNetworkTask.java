@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ioad.honey.Bean.Cart;
 import com.ioad.honey.Bean.Ingredient;
 import com.ioad.honey.Bean.Menu;
 import com.ioad.honey.Bean.Tip;
@@ -27,6 +28,7 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
     private ArrayList<Menu> menus;
     private ArrayList<Tip> tips;
     private ArrayList<Ingredient> ingredients;
+    private ArrayList<Cart> carts;
     private String where;
     private String kind;
 
@@ -45,6 +47,9 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
                 break;
             case "ingredient" :
                 this.ingredients = new ArrayList<>();
+                break;
+            case "carts_info":
+                this.carts = new ArrayList<>();
                 break;
         }
     }
@@ -109,6 +114,8 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
             return menus;
         } else if (where.equals("select") && kind.equals("ingredient")) {
             return ingredients;
+        } else if (where.equals("select") && kind.equals("carts_info")) {
+            return carts;
         }
         else {
             return result;
@@ -172,6 +179,23 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
                         ingredients.add(ingredient);
                     }
                     break;
+                case "carts_info":
+                    carts.clear();
+                    for (int i=0; i<jsonArray.length(); i++){
+                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+
+                        int cartCode = jsonObject1.getInt("cartCode");
+                        int cartEA = jsonObject1.getInt("cartEA");
+                        String iName = jsonObject1.getString("iName");
+                        String iCapacity = jsonObject1.getString("iCapacity");
+                        String iUnit = jsonObject1.getString("iUnit");
+                        int iPrice = jsonObject1.getInt("iPrice");
+                        String mName = jsonObject1.getString("mName");
+                        String mImagePath = jsonObject1.getString("mImagePath");
+
+                        Cart cart = new Cart(cartCode, cartEA, iName, iCapacity, iUnit, iPrice, mName, mImagePath);
+                        carts.add(cart);
+                    }
             }
 
 
