@@ -21,31 +21,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Honey">
         <activity
-            android:name=".Activity.CartActivity"
+            android:name=".activity.CartActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DaumActivity"
+            android:name=".activity.DaumActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.JoinAddrActivity"
+            android:name=".activity.JoinAddrActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.JoinActivity"
+            android:name=".activity.JoinActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.TipActivity"
+            android:name=".activity.TipActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.SelectMenuActivity"
+            android:name=".activity.SelectMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MainCategoryActivity"
+            android:name=".activity.MainCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
