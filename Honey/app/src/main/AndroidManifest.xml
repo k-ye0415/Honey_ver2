@@ -21,6 +21,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Honey">
         <activity
+            android:name=".activity.SearchActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.BuyHistoryActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.MyPageActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.CartActivity"
             android:exported="false" />
         <activity

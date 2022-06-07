@@ -43,7 +43,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="수량 : 1"
+                android:text="@string/ingredient_count"
                 android:gravity="right"
                 android:textSize="15dp"
                 />

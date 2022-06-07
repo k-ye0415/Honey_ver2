@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (etLoginId.getText() == null || etLoginPw.getText() == null) {
-                    Toast.makeText(LoginActivity.this, "아이디 및 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, R.string.check_login, Toast.LENGTH_SHORT).show();
                 } else {
                     userId = etLoginId.getText().toString();
                     userPw = etLoginPw.getText().toString();
@@ -83,9 +83,8 @@ public class LoginActivity extends AppCompatActivity {
             userInfos = (ArrayList<UserInfo>) obj;
 
             if (userInfos == null) {
-                Toast.makeText(LoginActivity.this, "아이디 비밀번호 확인해주세요", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, R.string.false_login, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(LoginActivity.this, "hello", Toast.LENGTH_SHORT).show();
                 String id = userInfos.get(0).getUserId();
                 Shared.setStringPrf(LoginActivity.this, "USER_ID", id);
                 Intent intent = new Intent(LoginActivity.this, MainCategoryActivity.class);

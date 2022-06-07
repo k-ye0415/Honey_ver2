@@ -49,9 +49,9 @@ public class JoinFragment extends Fragment {
                 joinId = etJoinId.getText().toString().trim();
                 joinPw = etJoinPw.getText().toString().trim();
                 if (joinId.equals("")) {
-                    Toast.makeText(getActivity(), "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.check_id, Toast.LENGTH_SHORT).show();
                 } else if (joinPw.equals("")) {
-                    Toast.makeText(getActivity(), "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.check_pw, Toast.LENGTH_SHORT).show();
                 } else if (!joinId.equals("") && !joinPw.equals("")) {
                     url = Constant.SERVER_IP + "honey_login_confirm_j.jsp?cId=" + joinId + "&cPw=" + joinPw;
                     userInfos = new ArrayList<>();
@@ -86,7 +86,7 @@ public class JoinFragment extends Fragment {
             userInfos = (ArrayList<UserInfo>) obj;
 
             if (userInfos != null) {
-                Toast.makeText(getActivity(), "중복된 아이디입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.overlap_id, Toast.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent(getActivity(), JoinAddrActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

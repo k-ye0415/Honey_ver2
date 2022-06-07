@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="꿀재료와 함께하시려면 \n약관에 동의 해주셔야해요 :)"
+            android:text="@string/info_TOS"
             />
 
         <LinearLayout
@@ -28,7 +28,7 @@
                 android:id="@+id/cb_first"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="[필수] 꿀재료 서비스 이용약관"
+                android:text="@string/first_TOS_title"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:id="@+id/cb_second"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="[필수] 개인정보 수집 및 이용약관"
+                android:text="@string/second_TOS_title"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                 android:id="@+id/cb_third"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="[필수] 광고성 정보 수신 동의"
+                android:text="@string/third_TOS_title"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -128,7 +128,7 @@
             android:id="@+id/cb_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전체 동의"/>
+            android:text="@string/all_TOS_title"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -143,7 +143,7 @@
                 android:id="@+id/btn_TOS_finish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="완료" />
+                android:text="@string/finish" />
         </LinearLayout>
     </LinearLayout>
 

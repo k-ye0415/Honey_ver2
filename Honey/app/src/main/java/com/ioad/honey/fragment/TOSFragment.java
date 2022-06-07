@@ -115,7 +115,7 @@ public class TOSFragment extends Fragment {
                 case R.id.btn_TOS_finish:
                     if (cbFirst.isChecked() == false || cbSecond.isChecked() == false
                             || cbThird.isChecked() == false || cbAll.isChecked() == false) {
-                        Toast.makeText(getActivity(), "약관에 동의 해주세용", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.agree_TOS, Toast.LENGTH_SHORT).show();
                     } else {
                         JoinFragment joinFragment = new JoinFragment();
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

@@ -44,7 +44,7 @@ public class JoinElseFragment extends Fragment {
                 joinEmail = etJoinEmail.getText().toString().trim();
 
                 if (joinName.equals("") || joinPhone.equals("") || joinEmail.equals("")) {
-                    Toast.makeText(getActivity(), "상세 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.else_empty_check, Toast.LENGTH_SHORT).show();
                 } else {
                     joinId = Shared.getStringPref(getActivity(), "JOIN_ID");
                     joinPw = Shared.getStringPref(getActivity(), "JOIN_PW");
@@ -68,7 +68,7 @@ public class JoinElseFragment extends Fragment {
                     Log.e("TAG", "joinURL : " + url);
                     String result = insertJoinUser();
                     if (result.equals("1")) {
-                        Toast.makeText(getActivity(), "환영합니당", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.welcome, Toast.LENGTH_SHORT).show();
                         Shared.removeStringPrf(getActivity(), "JOIN_ID");
                         Shared.removeStringPrf(getActivity(), "JOIN_PW");
                         Shared.removeStringPrf(getActivity(), "JOIN_ADDR");
@@ -78,7 +78,7 @@ public class JoinElseFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), MainCategoryActivity.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(getActivity(), "오류! 다시 시도해주세요ㅠ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.join_false, Toast.LENGTH_SHORT).show();
                         Shared.removeStringPrf(getActivity(), "JOIN_ID");
                         Shared.removeStringPrf(getActivity(), "JOIN_PW");
                         Shared.removeStringPrf(getActivity(), "JOIN_ADDR");

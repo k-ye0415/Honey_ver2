@@ -44,7 +44,7 @@ public class JoinAddrFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), JoinAddrActivity.class);
                     startActivityForResult(intent, SEARCH_ADDRESS_ACTIVITY);
                 } else {
-                    Toast.makeText(getActivity(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.check_internet, Toast.LENGTH_SHORT).show();
                 }
             }
         });

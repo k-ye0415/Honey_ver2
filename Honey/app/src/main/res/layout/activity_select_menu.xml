@@ -59,7 +59,7 @@
                 android:id="@+id/tv_tip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="꿀팁보러가기"
+                android:text="@string/go_tip"
                 android:textStyle="bold"
                 android:padding="5dp"
                 android:background="@drawable/tip_btn_right_custom"

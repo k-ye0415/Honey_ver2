@@ -48,7 +48,7 @@ public class JoinAddrActivity extends AppCompatActivity {
                     Intent intent = new Intent(JoinAddrActivity.this, DaumActivity.class);
                     startActivityForResult(intent,SEARCH_ADDRESS_ACTIVITY );
                 } else {
-                    Toast.makeText(JoinAddrActivity.this, "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JoinAddrActivity.this, R.string.check_internet, Toast.LENGTH_SHORT).show();
                 }
             }
         });

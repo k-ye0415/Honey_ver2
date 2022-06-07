@@ -46,7 +46,7 @@
                     android:layout_height="match_parent"
                     android:gravity="right|center_vertical"
                     android:layout_weight="1"
-                    android:text="배달팁 안내"
+                    android:text="@string/delivery_tip_info"
                     />
                 <ImageButton
                     android:id="@+id/ib_cart_delivery_tip"
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="전체 삭제"
+                android:text="@string/delivery_all_del"
                 />
             <ListView
                 android:id="@+id/lv_cart_list"
@@ -79,7 +79,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="총 주문금액"
+                    android:text="@string/delivery_tot_price"
                     android:textSize="20dp"
                     />
 
@@ -105,7 +105,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="배달팁"
+                    android:text="@string/delivery_tip"
                     android:textSize="15dp"
                     />
 
@@ -152,7 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0px"
                 android:layout_weight="1"
-                android:text="구경하러 가기"
+                android:text="@string/go_shopping"
                 />
 
         </LinearLayout>

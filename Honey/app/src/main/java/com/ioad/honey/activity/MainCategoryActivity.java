@@ -47,25 +47,28 @@ public class MainCategoryActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.tab_cart:
                         if (userId.length() == 0) {
-                            Toast.makeText(mContext, "로그인 해주세요!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, R.string.please_login, Toast.LENGTH_SHORT).show();
                         } else {
                             intent = new Intent(mContext, CartActivity.class);
                             startActivity(intent);
                         }
                         break;
                     case R.id.tab_buyHistory:
-                        Toast.makeText(mContext, "tab_buyHistory", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(mContext, BuyHistoryActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.tab_mypage:
                         if (userId.length() == 0) {
                             intent = new Intent(mContext, LoginActivity.class);
                             startActivity(intent);
                         } else {
-
+                            intent = new Intent(mContext, MyPageActivity.class);
+                            startActivity(intent);
                         }
                         break;
                     case R.id.tab_search:
-                        Toast.makeText(mContext, "tab_search", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(mContext, SearchActivity.class);
+                        startActivity(intent);
                         break;
                 }
                 return false;

@@ -110,7 +110,7 @@ public class SelectMenuActivity extends AppCompatActivity {
                 if (codeArr.size() == 1) {
                     Toast.makeText(SelectMenuActivity.this, "장바구니 담기 완료", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(SelectMenuActivity.this, nameArr.get(0) + "외 " + codeArr.size() + "장바구니 담기 완료", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SelectMenuActivity.this, nameArr.get(0) + "외 " + codeArr.size() + R.string.cart_add, Toast.LENGTH_SHORT).show();
                 }
                 Shared.removeStringArrayPref(SelectMenuActivity.this, "SELECT_CODE");
                 Shared.removeStringArrayPref(SelectMenuActivity.this, "SELECT_NAME");

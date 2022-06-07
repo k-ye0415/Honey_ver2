@@ -38,7 +38,7 @@
             android:id="@+id/btn_join_addr_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="주소 검색" />
+            android:text="@string/search_addr" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
             android:id="@+id/btn_addr_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="다음"
+            android:text="@string/next"
             />
     </LinearLayout>
 

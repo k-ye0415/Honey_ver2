@@ -83,7 +83,7 @@ public class CartListAdapter extends BaseAdapter {
             public void onClick(View view) {
                 count = Integer.parseInt(String.valueOf(ingredientCount));
                 if (count == 1) {
-                    Toast.makeText(mContext, "최소 구매 수량입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, R.string.cart_min, Toast.LENGTH_SHORT).show();
                 } else {
                     count -= 1;
                     ingredientCount.setText(String.valueOf(count));
@@ -98,7 +98,7 @@ public class CartListAdapter extends BaseAdapter {
             public void onClick(View view) {
                 count = Integer.parseInt(String.valueOf(ingredientCount));
                 if (count == 10) {
-                    Toast.makeText(mContext, "최대 구매 수량입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, R.string.cart_max, Toast.LENGTH_SHORT).show();
                 } else {
                     count += 1;
                     ingredientCount.setText(String.valueOf(count));

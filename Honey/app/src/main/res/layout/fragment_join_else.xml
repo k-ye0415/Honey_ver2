@@ -38,7 +38,7 @@
             android:id="@+id/btn_join_finish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="완료" />
+            android:text="@string/finish" />
     </LinearLayout>
 
 </LinearLayout>

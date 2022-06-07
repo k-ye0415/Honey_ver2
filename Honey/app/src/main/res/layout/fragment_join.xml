@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="꿀재료에 오신걸 환영합니다\n 아이디와 비밀번호를 입력해주세요:)"
+            android:text="@string/welcome_join"
             />
         <EditText
             android:id="@+id/et_join_id"
@@ -47,7 +47,7 @@
                     android:id="@+id/btn_next"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="다음"
+                    android:text="@string/next"
                     />
             </LinearLayout>
     </LinearLayout>

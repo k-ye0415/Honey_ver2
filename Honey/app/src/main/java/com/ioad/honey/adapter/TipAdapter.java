@@ -118,15 +118,13 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
                                 String result = tipDeleted();
                                 if (result.equals("1")) {
 //                                    deleteOnClickListener.onDeleteClickListener(true);
-                                    Toast.makeText(mContext, "꿀재료는 꿀팁을 사랑하지만, 삭제 완료", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(mContext, "아싸 삭제 실패!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, R.string.tip_remove, Toast.LENGTH_SHORT).show();
                                 }
                                 deleteDialog.dismiss();
                             }
                         });
                     } else {
-                        Toast.makeText(mContext, "내가 쓴 꿀팁만 삭제 가능해요!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, R.string.self_tip_remove, Toast.LENGTH_SHORT).show();
                     }
 
                 }
