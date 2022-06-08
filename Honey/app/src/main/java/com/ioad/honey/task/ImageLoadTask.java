@@ -12,8 +12,12 @@ public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
 
     private String urlStr;
     private ImageView imageView;
+    private Bitmap bitmap;
 
     private static HashMap<String, Bitmap> bitmapHashMap = new HashMap<>();
+
+    public ImageLoadTask() {
+    }
 
     public ImageLoadTask(String urlStr, ImageView imageView) {
         this.urlStr = urlStr;
@@ -28,12 +32,10 @@ public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
     @Override
     protected Bitmap doInBackground(Void... voids) {
 
-        Bitmap bitmap = null;
-
         try {
             if (bitmapHashMap.containsKey(urlStr)) {
                 Bitmap oldBitmap = bitmapHashMap.remove(urlStr);
-                if (oldBitmap != null) {
+                if (oldBitmap != null && !oldBitmap.isRecycled()) {
                     oldBitmap.recycle();
                     oldBitmap = null;
                 }
@@ -62,4 +64,6 @@ public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
         imageView.setImageBitmap(bitmap);
         imageView.invalidate();
     }
+
+
 }

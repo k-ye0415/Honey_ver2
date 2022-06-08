@@ -13,6 +13,8 @@
         <entry key="app/src/main/res/drawable/search_edit_custom.xml" value="0.301025641025641" />
         <entry key="app/src/main/res/drawable/textview_custom.xml" value="0.301025641025641" />
         <entry key="app/src/main/res/drawable/tip_btn_left_custom.xml" value="0.301025641025641" />
+        <entry key="app/src/main/res/layout/activity_buy.xml" value="0.2368659420289855" />
+        <entry key="app/src/main/res/layout/activity_buy_history.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/activity_daum.xml" value="0.15364583333333334" />
         <entry key="app/src/main/res/layout/activity_join.xml" value="0.27898550724637683" />
@@ -20,8 +22,12 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2817028985507246" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16576086956521738" />
         <entry key="app/src/main/res/layout/activity_main_category.xml" value="0.2866847826086957" />
+        <entry key="app/src/main/res/layout/activity_my_page.xml" value="0.223731884057971" />
+        <entry key="app/src/main/res/layout/activity_my_page_edit.xml" value="0.223731884057971" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.23278985507246377" />
         <entry key="app/src/main/res/layout/activity_select_menu.xml" value="0.2755208333333333" />
         <entry key="app/src/main/res/layout/activity_tip.xml" value="0.2755208333333333" />
+        <entry key="app/src/main/res/layout/buy_history_list_layout.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/layout/cart_list_layout.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/content_join_addr.xml" value="0.2726449275362319" />
         <entry key="app/src/main/res/layout/dashborad_page.xml" value="0.28396739130434784" />
@@ -35,10 +41,14 @@
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.2758152173913043" />
         <entry key="app/src/main/res/layout/fragment_school_food.xml" value="0.28396739130434784" />
         <entry key="app/src/main/res/layout/fragment_t_o_s.xml" value="0.22826086956521738" />
+        <entry key="app/src/main/res/layout/logout_dialog.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/layout/menu_layout.xml" value="0.28396739130434784" />
         <entry key="app/src/main/res/layout/menu_select_list_layout.xml" value="0.28396739130434784" />
+        <entry key="app/src/main/res/layout/my_saerch_list_item.xml" value="0.22826086956521738" />
+        <entry key="app/src/main/res/layout/search_list_item.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/tip_delete_dialog.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/tip_item.xml" value="0.28396739130434784" />
+        <entry key="app/src/main/res/layout/tip_list_item.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.28958333333333336" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.28396739130434784" />
       </map>

@@ -53,7 +53,7 @@ public class JoinFragment extends Fragment {
                 } else if (joinPw.equals("")) {
                     Toast.makeText(getActivity(), R.string.check_pw, Toast.LENGTH_SHORT).show();
                 } else if (!joinId.equals("") && !joinPw.equals("")) {
-                    url = Constant.SERVER_IP + "honey_login_confirm_j.jsp?cId=" + joinId + "&cPw=" + joinPw;
+                    url = Constant.SERVER_IP + "honey/honey_login_confirm_j.jsp?cId=" + joinId + "&cPw=" + joinPw;
                     userInfos = new ArrayList<>();
 
                     checkJoin();

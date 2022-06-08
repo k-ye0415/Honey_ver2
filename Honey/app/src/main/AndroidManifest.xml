@@ -21,6 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Honey">
         <activity
+            android:name=".activity.BuyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MyPageEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.SearchActivity"
             android:exported="true" />
         <activity

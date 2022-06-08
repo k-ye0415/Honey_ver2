@@ -1,8 +1,12 @@
 package com.ioad.honey.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -37,6 +41,7 @@ public class CartActivity extends AppCompatActivity implements CartClickListener
     String deleteResult;
     String url;
     String userId;
+    String allDelResult;
     ArrayList<Cart> carts;
     CartListAdapter adapter;
     DecimalFormat priceFormat = new DecimalFormat("###,###");
@@ -85,6 +90,14 @@ public class CartActivity extends AppCompatActivity implements CartClickListener
 
                         });
 
+        cartList.setOnTouchListener(touchListener);
+        cartList.setOnScrollListener(touchListener.makeScrollListener());
+
+        ibDeliveryTip.setOnClickListener(onClickListener);
+        btnCartAllDel.setOnClickListener(onClickListener);
+        btnDelivery.setOnClickListener(onClickListener);
+        btnGoBack.setOnClickListener(onClickListener);
+
     }
 
     @Override
@@ -93,8 +106,51 @@ public class CartActivity extends AppCompatActivity implements CartClickListener
         connectGetData();
     }
 
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.ib_cart_delivery_tip:
+                    new AlertDialog.Builder(view.getContext())
+                            .setMessage("배달팁 안내!\n\n주문금액                                                  "+
+                                    "배달팁\n30,000원~                                            무료배송\n" +
+                                    "10,000원~30,000원                             3,000원\n" +
+                                    "*최소주문금액은 10,000원입니다.")
+                            .setCancelable(true)
+                            .show();
+                    break;
+                case R.id.btn_cart_all_del:
+                    new AlertDialog.Builder(view.getContext())
+                            .setMessage("장바구니를 비우시겠습니까?")
+                            .setCancelable(false)
+                            .setNegativeButton("아니오", null)
+                            .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    allDelResult = deleteCart();
+                                    if(!allDelResult.equals(null)){
+                                        Snackbar.make(view, "장바구니를 비웠습니다.", Snackbar.LENGTH_SHORT).show();
+                                    }
+                                    connectGetData();
+                                }
+                            })
+                            .show();
+                    break;
+                case R.id.btn_delivery:
+                    Intent intent = new Intent(CartActivity.this, BuyActivity.class);
+                    intent.putExtra("TOTAL_PRICE", totalPrice());
+                    startActivity(intent);
+                    break;
+                case R.id.btn_go_back:
+                    finish();
+                    break;
+            }
+        }
+    };
+
+
     private String connectDeleteData(int cartCode){
-        url = Constant.SERVER_IP + "Cart_Deletedate_Update_Return.jsp?" + "cartCode=" + cartCode;
+        url = Constant.SERVER_IP + "honey/Cart_Deletedate_Update_Return.jsp?" + "cartCode=" + cartCode;
         String result = null;
         try {
             DeleteNetworkTask networkTask = new DeleteNetworkTask(CartActivity.this, url, "delete");
@@ -111,7 +167,7 @@ public class CartActivity extends AppCompatActivity implements CartClickListener
 
     private void connectGetData(){
 
-        url = Constant.SERVER_IP + "Cart_All_List.jsp?cId=" + userId;
+        url = Constant.SERVER_IP + "honey/Cart_All_List.jsp?cId=" + userId;
 
         try{
             SelectNetworkTask networkTask = new SelectNetworkTask(CartActivity.this, url, "select", "carts_info");
@@ -155,6 +211,20 @@ public class CartActivity extends AppCompatActivity implements CartClickListener
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+
+    private String deleteCart() {
+        String result = null;
+        try {
+            url = Constant.SERVER_IP + "honey/Cart_AllDeletedate_Update_Return.jsp?Client_cId=" + userId;
+            DeleteNetworkTask task = new DeleteNetworkTask(CartActivity.this, url, "delete");
+            Object obj = task.execute().get();
+            result = (String) obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override

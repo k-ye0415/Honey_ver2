@@ -47,20 +47,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
-                <ImageButton
-                    android:id="@+id/ib_cart_ingredient_minus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <Button
+                    android:id="@+id/btn_cart_ingredient_minus"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     />
                 <EditText
                     android:id="@+id/et_cart_ingredient_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
-                <ImageButton
-                    android:id="@+id/ib_cart_ingredient_add"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <Button
+                    android:id="@+id/btn_cart_ingredient_add"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     />
                 <TextView
                     android:id="@+id/tv_cart_ingredient_total_price"
@@ -69,6 +69,16 @@
                     android:text="total Price"
                     />
             </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <Button
+                android:id="@+id/btn_cart_del"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                />
         </LinearLayout>
     </LinearLayout>
 

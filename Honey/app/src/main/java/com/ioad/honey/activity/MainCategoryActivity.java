@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,7 +18,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.ioad.honey.adapter.TabPagerAdapter;
 import com.ioad.honey.R;
+import com.ioad.honey.common.DBHelper;
 import com.ioad.honey.common.Shared;
+import com.ioad.honey.task.ImageLoadTask;
 
 public class MainCategoryActivity extends AppCompatActivity {
 
@@ -27,6 +30,7 @@ public class MainCategoryActivity extends AppCompatActivity {
     ViewPager2 viewPager;
     TabPagerAdapter tabPagerAdapter;
     String userId;
+    ImageLoadTask task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,15 @@ public class MainCategoryActivity extends AppCompatActivity {
         mContext = getApplicationContext();
         userId = Shared.getStringPref(mContext, "USER_ID");
         Log.e("TAG", "user ID ::::: " + Shared.getStringPref(mContext, "USER_ID"));
+
+        SQLiteDatabase db;
+        DBHelper helper;
+        helper = new DBHelper(MainCategoryActivity.this);
+        db = helper.getWritableDatabase();
+        helper.onCreate(db);
+
+        task = new ImageLoadTask();
+
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         tabLayout = findViewById(R.id.tab_layout);
@@ -119,4 +132,12 @@ public class MainCategoryActivity extends AppCompatActivity {
             }
         }).attach();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("TAG", "onPause");
+        task.isCancelled();
+    }
+
 }

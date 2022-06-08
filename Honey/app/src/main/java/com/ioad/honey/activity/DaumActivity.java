@@ -45,7 +45,7 @@ public class DaumActivity extends AppCompatActivity {
             }
         });
 
-        wv_daum.loadUrl(Constant.SERVER_IP + "daum.html");
+        wv_daum.loadUrl(Constant.SERVER_IP + "honey/daum.html");
 
     }
 }

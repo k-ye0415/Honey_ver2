@@ -62,7 +62,7 @@ public class JoinElseFragment extends Fragment {
                     Log.d("TAG", "joinEmail : " + joinEmail);
                     Log.d("TAG", "join ----------- ");
 
-                    url = Constant.SERVER_IP + "honey_signup_j.jsp?cId=" + joinId
+                    url = Constant.SERVER_IP + "honey/honey_signup_j.jsp?cId=" + joinId
                             + "&cPw=" + joinPw + "&cName=" + joinName + "&cTelno=" + joinPhone
                             + "&cEmail=" + joinEmail + "&cAddress1=" + joinAddr+ "&cAddress2=" + joinAddrDetail+ "&cPostNum=" + null;
                     Log.e("TAG", "joinURL : " + url);

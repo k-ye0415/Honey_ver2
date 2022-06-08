@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,4 +89,24 @@ public class DashboardFragment extends Fragment {
         task.execute();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.e("TAG", "onDestroyView");
+        task.cancel(true);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e("TAG", "Destroy");
+        task.cancel(true);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.e("TAG", "onPause");
+        task.isCancelled();
+    }
 }
