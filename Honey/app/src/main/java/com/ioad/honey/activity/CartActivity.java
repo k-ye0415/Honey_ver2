@@ -31,20 +31,22 @@ import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity implements CartClickListener {
 
-    LinearLayout layoutCartList, layoutCartEmpty;
-    ProgressBar pbCart;
-    TextView tvCartDelivery, tvPriceTot, tvDeliveryTip;
-    ImageButton ibDeliveryTip;
-    Button btnCartAllDel, btnDelivery, btnGoBack;
-    ListView cartList;
+    private final String TAG = getClass().getSimpleName();
 
-    String deleteResult;
-    String url;
-    String userId;
-    String allDelResult;
-    ArrayList<Cart> carts;
-    CartListAdapter adapter;
-    DecimalFormat priceFormat = new DecimalFormat("###,###");
+    private LinearLayout layoutCartList, layoutCartEmpty;
+    private ProgressBar pbCart;
+    private TextView tvCartDelivery, tvPriceTot, tvDeliveryTip;
+    private ImageButton ibDeliveryTip;
+    private Button btnCartAllDel, btnDelivery, btnGoBack;
+    private ListView cartList;
+
+    private String deleteResult;
+    private String url;
+    private String userId;
+    private String allDelResult;
+    private ArrayList<Cart> carts;
+    private CartListAdapter adapter;
+    private DecimalFormat priceFormat = new DecimalFormat("###,###");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -24,13 +24,15 @@ import com.ioad.honey.task.UpdateNetworkTask;
 
 public class MyPageEditActivity extends AppCompatActivity {
 
-    private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
-    EditText etMyId, etMyPw, etMyName, etMyPhone, etMyPost, etMyAddr, etMyAddrDetail, etMyEmail;
-    Button btnMyEdit, btnLogout, btnEditAddrSearch, btnDaiLogout, btnDaiCancel;
+    private final String TAG = getClass().getSimpleName();
 
-    String userId, userPw, userNm, userPhone, userPost, userAddr, userAddrDetail, userEmail;
-    String url;
-    Dialog logoutDialog;
+    private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
+    private EditText etMyId, etMyPw, etMyName, etMyPhone, etMyPost, etMyAddr, etMyAddrDetail, etMyEmail;
+    private Button btnMyEdit, btnLogout, btnEditAddrSearch, btnDaiLogout, btnDaiCancel;
+
+    private String userId, userPw, userNm, userPhone, userPost, userAddr, userAddrDetail, userEmail;
+    private String url;
+    private Dialog logoutDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

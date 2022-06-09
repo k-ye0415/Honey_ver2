@@ -1,7 +1,8 @@
-package com.ioad.honey.activity;
+package com.ioad.honey.common;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,12 +36,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public void selectAsyncData(String url){
+    public void selectAsyncData(String url) {
         Log.d("INSERT_URL", url);
     }
-    public void insertAsyncData(){}
-    public void updateAsyncData(){}
-    public void deleteAsyncData(){}
+
+    public String insertAsyncData() {
+        String result = null;
+        return result;
+    }
+
+    public String updateAsyncData() {
+        String result = null;
+        return result;
+    }
+
+    public String deleteAsyncData() {
+        String result = null;
+        return result;
+    }
+
+    public void imageAsync(String imageCode, ImageView imageView) {
+    }
 
 
 }

@@ -22,9 +22,11 @@ import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button btnLoginBack, btnLogin, btnJoin;
-    EditText etLoginId, etLoginPw;
-    TextView tvIdSearch, tvPwSearch;
+    private final String TAG = getClass().getSimpleName();
+
+    private Button btnLoginBack, btnLogin, btnJoin;
+    private EditText etLoginId, etLoginPw;
+    private TextView tvIdSearch, tvPwSearch;
 
     private String url = null;
     private String userId;

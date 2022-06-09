@@ -32,22 +32,24 @@ import java.util.Date;
 
 public class SearchActivity extends AppCompatActivity {
 
-    EditText etSearch;
-    Button btnSearch;
-    LinearLayout llMySearch, llSearchList;
-    ListView lvMySearch, lvSearchList;
+    private final String TAG = getClass().getSimpleName();
 
-    long now = 0;
-    Date date = null;
-    SimpleDateFormat dateFormat = null;
-    DBHelper helper;
-    Cursor cursor;
+    private EditText etSearch;
+    private Button btnSearch;
+    private LinearLayout llMySearch, llSearchList;
+    private ListView lvMySearch, lvSearchList;
+
+    private long now = 0;
+    private Date date = null;
+    private SimpleDateFormat dateFormat = null;
+    private DBHelper helper;
+    private Cursor cursor;
 
 
-    ArrayList<Search> searches = new ArrayList<>();
-    SearchAdapter adapter;
-    MySearchAdapter mySearchAdapter;
-    String url;
+    private ArrayList<Search> searches = new ArrayList<>();
+    private SearchAdapter adapter;
+    private MySearchAdapter mySearchAdapter;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

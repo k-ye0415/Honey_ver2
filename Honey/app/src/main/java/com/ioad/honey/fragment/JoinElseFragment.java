@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.ioad.honey.activity.MainCategoryActivity;
 import com.ioad.honey.R;
+import com.ioad.honey.common.DBHelper;
 import com.ioad.honey.common.Util;
 import com.ioad.honey.task.InsertNetworkTask;
 import com.ioad.honey.common.Constant;
@@ -22,10 +23,11 @@ import com.ioad.honey.common.Shared;
 
 public class JoinElseFragment extends Fragment {
 
-    EditText etJoinName, etJoinPhone, etJoinEmail;
-    Button btnJoinFinish;
-    String joinId, joinPw, joinAddr, joinAddrDetail, joinName, joinPhone, joinEmail;
-    String url;
+    private EditText etJoinName, etJoinPhone, etJoinEmail;
+    private Button btnJoinFinish;
+    private String joinId, joinPw, joinAddr, joinAddrDetail, joinName, joinPhone, joinEmail;
+    private String url;
+    private DBHelper helper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,17 +54,6 @@ public class JoinElseFragment extends Fragment {
                     joinPw = Shared.getStringPref(getActivity(), "JOIN_PW");
                     joinAddr = Shared.getStringPref(getActivity(), "JOIN_ADDR");
                     joinAddrDetail = Shared.getStringPref(getActivity(), "JOIN_ADDR_DETAIL");
-                    //String urlAddr = "http://"+macIP+":8080/honey/honey_signup_j.jsp?";  //회원가입 완료
-
-                    Log.d("TAG", "join ----------- ");
-                    Log.d("TAG", "joinId : " + joinId);
-                    Log.d("TAG", "joinPw : " + joinPw);
-                    Log.d("TAG", "joinAddr : " + joinAddr);
-                    Log.d("TAG", "joinAddrDetail : " + joinAddrDetail);
-                    Log.d("TAG", "joinName : " + joinName);
-                    Log.d("TAG", "joinPhone : " + joinPhone);
-                    Log.d("TAG", "joinEmail : " + joinEmail);
-                    Log.d("TAG", "join ----------- ");
 
                     url = Constant.SERVER_IP + "honey/honey_signup_j.jsp?cId=" + joinId
                             + "&cPw=" + joinPw + "&cName=" + joinName + "&cTelno=" + joinPhone
@@ -72,6 +63,7 @@ public class JoinElseFragment extends Fragment {
                     if (result.equals("1")) {
 //                        Toast.makeText(getActivity(), R.string.welcome, Toast.LENGTH_SHORT).show();
                         Util.showToast(getActivity(),"환영합니다");
+                        helper.insertAddressData("DELIVERY_ADDR", joinAddr, joinAddrDetail);
                         Shared.removeStringPrf(getActivity(), "JOIN_ID");
                         Shared.removeStringPrf(getActivity(), "JOIN_PW");
                         Shared.removeStringPrf(getActivity(), "JOIN_ADDR");

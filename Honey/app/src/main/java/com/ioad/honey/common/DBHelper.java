@@ -50,6 +50,12 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(insertQuery);
     }
 
+    public void insertAddressData(String tableName, String address, String addressDetail) {
+        db = this.getWritableDatabase();
+        String insertQuery = "INSERT INTO " + tableName + " ('ADDRESS', 'ADDRESS_DETAIL') VALUES ('" + address + "', '" + addressDetail + "');";
+        db.execSQL(insertQuery);
+    }
+
     public Cursor selectSearchData(String tableName) {
         db = this.getReadableDatabase();
         String selectQuery = "SELECT INDEX_NUM, SEARCH_TEXT,MAX(SEARCH_DATE) FROM " + tableName + " WHERE SEARCH_DELETE is NULL GROUP BY SEARCH_TEXT ORDER BY SEARCH_DATE DESC";

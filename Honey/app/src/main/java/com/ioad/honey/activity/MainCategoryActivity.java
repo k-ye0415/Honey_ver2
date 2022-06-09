@@ -1,6 +1,7 @@
 package com.ioad.honey.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -25,22 +26,27 @@ import com.ioad.honey.task.ImageLoadTask;
 
 public class MainCategoryActivity extends AppCompatActivity {
 
-    Context mContext;
-    BottomNavigationView bottomNavigationView;
-    TabLayout tabLayout;
-    ViewPager2 viewPager;
-    TabPagerAdapter tabPagerAdapter;
-    String userId;
-    ImageLoadTask task;
+    private final String TAG = getClass().getSimpleName();
+
+    private Context mContext;
+    private BottomNavigationView bottomNavigationView;
+    private TabLayout tabLayout;
+    private ViewPager2 viewPager;
+    private TabPagerAdapter tabPagerAdapter;
+    private String userId;
+    private ImageLoadTask task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_category);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
         mContext = getApplicationContext();
         userId = Shared.getStringPref(mContext, "USER_ID");
-        Log.e("TAG", "user ID ::::: " + Shared.getStringPref(mContext, "USER_ID"));
+        Log.e("TAG", "user ID ::::: " + userId);
 
         SQLiteDatabase db;
         DBHelper helper;

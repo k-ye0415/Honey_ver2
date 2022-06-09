@@ -21,28 +21,30 @@ import java.util.ArrayList;
 
 public class TipActivity extends AppCompatActivity {
 
-    ImageView iv_tip_menu, iv_tip_title;
-    TextView tv_tip_name;
-    RecyclerView rv_tip_list;
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerView.Adapter adapter;
-    Button btn_tip_add;
+    private final String TAG = getClass().getSimpleName();
 
-    ImageLoadTask task;
-    String selectCode;
-    String selectName;
-    String strUrl;
-    ArrayList<Tip> tips;
+    private ImageView ivTipMenu, ivTipTitle;
+    private TextView tvTipName;
+    private RecyclerView rvTipList;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter adapter;
+    private Button btn_tip_add;
+
+    private ImageLoadTask task;
+    private String selectCode;
+    private String selectName;
+    private String strUrl;
+    private ArrayList<Tip> tips;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tip);
 
-        iv_tip_menu = findViewById(R.id.iv_tip_menu);
-        iv_tip_title = findViewById(R.id.iv_tip_title);
-        tv_tip_name = findViewById(R.id.tv_tip_name);
-        rv_tip_list = findViewById(R.id.rv_tip_list);
+        ivTipMenu = findViewById(R.id.iv_tip_menu);
+        ivTipTitle = findViewById(R.id.iv_tip_title);
+        tvTipName = findViewById(R.id.tv_tip_name);
+        rvTipList = findViewById(R.id.rv_tip_list);
         btn_tip_add = findViewById(R.id.btn_tip_add);
 
         // 값받아오기
@@ -50,9 +52,9 @@ public class TipActivity extends AppCompatActivity {
         selectCode = intent.getStringExtra("mCode");
         selectName = intent.getStringExtra("mName");
 
-        tv_tip_name.setText(selectName);
-        getImage(selectCode, iv_tip_menu);
-        getImage(null, iv_tip_title);
+        tvTipName.setText(selectName);
+        getImage(selectCode, ivTipMenu);
+        getImage(null, ivTipTitle);
 
     }
 
@@ -81,10 +83,10 @@ public class TipActivity extends AppCompatActivity {
             Object obj = networkTask.execute().get();
             tips = (ArrayList<Tip>) obj;
             layoutManager = new LinearLayoutManager(TipActivity.this);
-            rv_tip_list.setLayoutManager(layoutManager);
+            rvTipList.setLayoutManager(layoutManager);
 
             adapter = new TipAdapter(TipActivity.this, R.layout.tip_item, tips);
-            rv_tip_list.setAdapter(adapter);
+            rvTipList.setAdapter(adapter);
 
 
         } catch (Exception e) {

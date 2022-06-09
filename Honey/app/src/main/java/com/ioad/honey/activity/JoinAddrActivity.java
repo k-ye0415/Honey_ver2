@@ -12,16 +12,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ioad.honey.R;
+import com.ioad.honey.common.DBHelper;
 import com.ioad.honey.common.Util;
 import com.ioad.honey.task.AddressNetworkTask;
 import com.ioad.honey.common.Shared;
 
 public class JoinAddrActivity extends AppCompatActivity {
 
-    EditText etJoinAddr, etJoinAddrDetail;
-    Button btnSearch, btnNext;
-    String joinId, joinPw, address, addressDetail;
+    private final String TAG = getClass().getSimpleName();
+
+    private EditText etJoinAddr, etJoinAddrDetail;
+    private Button btnSearch, btnNext;
+    private String joinId, joinPw, address, addressDetail;
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
+    private DBHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +51,7 @@ public class JoinAddrActivity extends AppCompatActivity {
                 int status = AddressNetworkTask.getConnectivityStatus(JoinAddrActivity.this);
                 if (status == AddressNetworkTask.TYPE_MOBILE || status == AddressNetworkTask.TYPE_WIFI) {
                     Intent intent = new Intent(JoinAddrActivity.this, DaumActivity.class);
-                    startActivityForResult(intent,SEARCH_ADDRESS_ACTIVITY );
+                    startActivityForResult(intent, SEARCH_ADDRESS_ACTIVITY);
                 } else {
 //                    Toast.makeText(JoinAddrActivity.this, R.string.check_internet, Toast.LENGTH_SHORT).show();
                     Util.showToast(JoinAddrActivity.this, "인터넷 연결을 확인해주세요");
@@ -66,12 +70,13 @@ public class JoinAddrActivity extends AppCompatActivity {
 //                } else if (addressDetail.equals("")) {
 //                    Toast.makeText(JoinAddrActivity.this, "상세 주소를 검색해주세요", Toast.LENGTH_SHORT).show();
 //                } else {
-                    Intent intent1 = new Intent(JoinAddrActivity.this, JoinActivity.class);
+                Intent intent1 = new Intent(JoinAddrActivity.this, JoinActivity.class);
 //                    intent1.putExtra("JOIN_ADDR", address + addressDetail);
-                    Shared.setStringPrf(JoinAddrActivity.this, "JOIN_ADDR", address);
-                    Shared.setStringPrf(JoinAddrActivity.this, "JOIN_ADDR_DETAIL", addressDetail);
-                    intent1.putExtra("PAGE_INDEX", 3);
-                    startActivity(intent1);
+                Shared.setStringPrf(JoinAddrActivity.this, "JOIN_ADDR", address);
+                Shared.setStringPrf(JoinAddrActivity.this, "JOIN_ADDR_DETAIL", addressDetail);
+                helper.insertAddressData("DELIVERY_ADDR", address, addressDetail);
+                intent1.putExtra("PAGE_INDEX", 3);
+                startActivity(intent1);
 //                }
 
             }
@@ -95,4 +100,5 @@ public class JoinAddrActivity extends AppCompatActivity {
                 }
         }
     }
+
 }

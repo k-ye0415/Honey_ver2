@@ -2,16 +2,15 @@ package com.ioad.honey.fragment;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.ioad.honey.common.BaseFragment;
 import com.ioad.honey.adapter.DashboardViewAdapter;
 import com.ioad.honey.R;
 import com.ioad.honey.task.ImageLoadTask;
@@ -21,7 +20,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends BaseFragment {
 
     private ViewPager viewPager;
     private DashboardViewAdapter adapter;
@@ -73,40 +72,28 @@ public class DashboardFragment extends Fragment {
             }
         }, DELAY_MS, PERIOD_MS);
 
-        getMainImage("mainimg-1.png", iv_main_1);
-        getMainImage("main_week.png", iv_main_week);
-        getMainImage("week_1.png", iv_main_week_1);
-        getMainImage("week_2.png", iv_main_week_2);
-        getMainImage("week_3.png", iv_main_week_3);
-        getMainImage("google_map_event.png", iv_main_event);
+        imageAsync("mainimg-1.png", iv_main_1);
+        imageAsync("main_week.png", iv_main_week);
+        imageAsync("week_1.png", iv_main_week_1);
+        imageAsync("week_2.png", iv_main_week_2);
+        imageAsync("week_3.png", iv_main_week_3);
+        imageAsync("google_map_event.png", iv_main_event);
 
         return view;
     }
 
-    public void getMainImage(String imageNm, ImageView imageView) {
-        String url = Constant.SERVER_URL_IMG + imageNm;
+//    public void getMainImage(String imageNm, ImageView imageView) {
+//        String url = Constant.SERVER_URL_IMG + imageNm;
+//        task = new ImageLoadTask(url, imageView);
+//        task.execute();
+//    }
+
+
+    @Override
+    public void imageAsync(String imageCode, ImageView imageView) {
+        super.imageAsync(imageCode, imageView);
+        String url = Constant.SERVER_URL_IMG + imageCode;
         task = new ImageLoadTask(url, imageView);
         task.execute();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.e("TAG", "onDestroyView");
-        task.cancel(true);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.e("TAG", "Destroy");
-        task.cancel(true);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.e("TAG", "onPause");
-        task.isCancelled();
     }
 }

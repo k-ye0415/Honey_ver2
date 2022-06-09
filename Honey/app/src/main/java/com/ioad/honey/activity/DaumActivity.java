@@ -13,7 +13,8 @@ import com.ioad.honey.common.Constant;
 
 public class DaumActivity extends AppCompatActivity {
 
-    WebView wv_daum;
+    private final String TAG = getClass().getSimpleName();
+    private WebView wv_daum;
 
     class MyJavaScriptInterface {
         @JavascriptInterface

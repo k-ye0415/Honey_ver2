@@ -14,11 +14,13 @@ import com.ioad.honey.R;
 
 public class JoinActivity extends FragmentActivity {
 
-    TOSFragment tosFragment;
-    JoinFragment joinFragment;
-    JoinAddrFragment joinAddrFragment;
-    JoinElseFragment joinElseFragment;
-    int pageIndex = 1;
+    private final String TAG = getClass().getSimpleName();
+
+    private TOSFragment tosFragment;
+    private JoinFragment joinFragment;
+    private JoinAddrFragment joinAddrFragment;
+    private JoinElseFragment joinElseFragment;
+    private int pageIndex = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

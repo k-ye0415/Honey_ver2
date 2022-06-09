@@ -17,11 +17,13 @@ import java.text.SimpleDateFormat;
 
 public class BuyActivity extends AppCompatActivity {
 
-    EditText etBuyAddr, etBuyAddrDetail, etBuyRequest;
-    Button btnBuySearch, btnGoBuy;
-    RadioGroup rgBuyKind;
-    RadioButton rbBuyCard, rbBuyBank;
-    TextView tvBuyPriceResult, tvBuyTip, tvBuyTot;
+    private final String TAG = getClass().getSimpleName();
+
+    private EditText etBuyAddr, etBuyAddrDetail, etBuyRequest;
+    private Button btnBuySearch, btnGoBuy;
+    private RadioGroup rgBuyKind;
+    private RadioButton rbBuyCard, rbBuyBank;
+    private TextView tvBuyPriceResult, tvBuyTip, tvBuyTot;
 
     int totalPrice;
     DecimalFormat priceFormat = new DecimalFormat("###,###");

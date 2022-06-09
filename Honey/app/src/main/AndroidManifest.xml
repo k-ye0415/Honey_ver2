@@ -58,7 +58,8 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainCategoryActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"

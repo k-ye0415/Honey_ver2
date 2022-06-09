@@ -23,15 +23,17 @@ import java.util.Arrays;
 
 public class MyPageActivity extends AppCompatActivity {
 
-    TextView tvUserName;
-    Button btnUserEdit, btnGoCart, btnGoHistory;
-    ListView lvTipList;
+    private final String TAG = getClass().getSimpleName();
 
-    String userId, userPw, userNm, userPhone, userPost, userAddr, userAddrDetail, userEmail;
-    String url;
-    ArrayList<Tip> tips;
-    ArrayList<UserInfo> userInfos;
-    MyPageTipAdapter adapter;
+    private TextView tvUserName;
+    private Button btnUserEdit, btnGoCart, btnGoHistory;
+    private ListView lvTipList;
+
+    private String userId, userPw, userNm, userPhone, userPost, userAddr, userAddrDetail, userEmail;
+    private String url;
+    private ArrayList<Tip> tips;
+    private ArrayList<UserInfo> userInfos;
+    private MyPageTipAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

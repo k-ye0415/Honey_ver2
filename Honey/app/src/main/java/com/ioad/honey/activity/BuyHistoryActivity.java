@@ -1,6 +1,5 @@
 package com.ioad.honey.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +11,7 @@ import android.widget.LinearLayout;
 import com.ioad.honey.R;
 import com.ioad.honey.adapter.BuyHistoryAdapter;
 import com.ioad.honey.bean.BuyHistory;
+import com.ioad.honey.common.BaseActivity;
 import com.ioad.honey.common.Constant;
 import com.ioad.honey.common.Shared;
 import com.ioad.honey.task.SelectNetworkTask;
@@ -20,14 +20,16 @@ import java.util.ArrayList;
 
 public class BuyHistoryActivity extends BaseActivity {
 
-    LinearLayout llHistoryList, llHistoryEmpty;
-    Button btnGoShopping;
-    RecyclerView rvHistoryList;
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerView.Adapter adapter;
+    private final String TAG = getClass().getSimpleName();
 
-    String userId, url;
-    ArrayList<BuyHistory> histories;
+    private LinearLayout llHistoryList, llHistoryEmpty;
+    private Button btnGoShopping;
+    private RecyclerView rvHistoryList;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter adapter;
+
+    private String userId, url;
+    private ArrayList<BuyHistory> histories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

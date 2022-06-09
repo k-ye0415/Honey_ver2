@@ -28,21 +28,21 @@ import java.util.ArrayList;
 
 public class SelectMenuActivity extends AppCompatActivity {
 
-    ImageView iv_select_menu;
-    TextView tv_select_name, tv_tip_count, tv_tip;
-    RecyclerView rv_select_menu;
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerView.Adapter adapter;
-    Button btn_cart;
+    private final String TAG = getClass().getSimpleName();
 
-    String selectCode, selectName, tipCount;
-    ImageLoadTask task;
-    ArrayList<Ingredient> ingredients;
+    private ImageView ivSelectNenu;
+    private TextView tvSelectName, tvTipCount, tvTip;
+    private RecyclerView rvSelectMenu;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter adapter;
+    private Button btnCart;
 
-    SharedPreferences preferences;
+    private String selectCode, selectName, tipCount;
+    private ImageLoadTask task;
+    private ArrayList<Ingredient> ingredients;
 
-    String url;
-    String userId;
+    private String url;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,25 +51,25 @@ public class SelectMenuActivity extends AppCompatActivity {
 
         userId = Shared.getStringPref(SelectMenuActivity.this, "USER_ID");
 
-        iv_select_menu = findViewById(R.id.iv_select_menu);
-        tv_select_name = findViewById(R.id.tv_select_name);
-        tv_tip_count = findViewById(R.id.tv_tip_count);
-        tv_tip = findViewById(R.id.tv_tip);
-        rv_select_menu = findViewById(R.id.rv_select_menu);
-        btn_cart = findViewById(R.id.btn_cart);
+        ivSelectNenu = findViewById(R.id.iv_select_menu);
+        tvSelectName = findViewById(R.id.tv_select_name);
+        tvTipCount = findViewById(R.id.tv_tip_count);
+        tvTip = findViewById(R.id.tv_tip);
+        rvSelectMenu = findViewById(R.id.rv_select_menu);
+        btnCart = findViewById(R.id.btn_cart);
 
 
         Intent intent = getIntent();
         selectCode = intent.getStringExtra("mCode");
         selectName = intent.getStringExtra("mName");
 
-        getSelectImage(selectCode, iv_select_menu);
-        tv_select_name.setText(selectName);
+        getSelectImage(selectCode, ivSelectNenu);
+        tvSelectName.setText(selectName);
 
         tipCount = tipCount();
-        tv_tip_count.setText("꿀팁 " + tipCount + "건");
-        tv_tip.setOnClickListener(tipOnClickListener);
-        btn_cart.setOnClickListener(cartOnClickListener);
+        tvTipCount.setText("꿀팁 " + tipCount + "건");
+        tvTip.setOnClickListener(tipOnClickListener);
+        btnCart.setOnClickListener(cartOnClickListener);
     }
 
 
@@ -77,7 +77,7 @@ public class SelectMenuActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         tipCount = tipCount();
-        tv_tip_count.setText("꿀팁 " + tipCount + "건");
+        tvTipCount.setText("꿀팁 " + tipCount + "건");
 
         getListData();
     }
@@ -153,10 +153,10 @@ public class SelectMenuActivity extends AppCompatActivity {
             ingredients = (ArrayList<Ingredient>) obj;
 
             layoutManager = new LinearLayoutManager(this);
-            rv_select_menu.setLayoutManager(layoutManager);
+            rvSelectMenu.setLayoutManager(layoutManager);
 
             adapter = new IngredientAdapter(this, R.layout.ingredient_list_layout, ingredients);
-            rv_select_menu.setAdapter(adapter);
+            rvSelectMenu.setAdapter(adapter);
 
         } catch (Exception e) {
             e.printStackTrace();
