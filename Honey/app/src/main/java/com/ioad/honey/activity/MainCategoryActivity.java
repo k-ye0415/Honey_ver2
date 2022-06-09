@@ -1,16 +1,21 @@
 package com.ioad.honey.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,30 +24,36 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.ioad.honey.adapter.TabPagerAdapter;
 import com.ioad.honey.R;
+import com.ioad.honey.bean.UserInfo;
 import com.ioad.honey.common.DBHelper;
 import com.ioad.honey.common.Shared;
 import com.ioad.honey.common.Util;
+import com.ioad.honey.fragment.AddrBottomSheet;
 import com.ioad.honey.task.ImageLoadTask;
+
+import java.util.ArrayList;
 
 public class MainCategoryActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
-
+    private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
     private Context mContext;
+    private TextView tvSelectAddr;
     private BottomNavigationView bottomNavigationView;
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private TabPagerAdapter tabPagerAdapter;
     private String userId;
     private ImageLoadTask task;
+    //    private DBHelper helper;
+//    private Cursor cursor;
+//    private ArrayList<UserInfo> userInfos;
+    private SlidingPaneLayout sliding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_category);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
 
         mContext = getApplicationContext();
         userId = Shared.getStringPref(mContext, "USER_ID");
@@ -56,7 +67,7 @@ public class MainCategoryActivity extends AppCompatActivity {
 
         task = new ImageLoadTask();
 
-
+        tvSelectAddr = findViewById(R.id.tv_select_addr);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.pager);
@@ -96,7 +107,23 @@ public class MainCategoryActivity extends AppCompatActivity {
             }
         });
 
+        tvSelectAddr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddrBottomSheet bottomSheet = new AddrBottomSheet();
+                bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());
+            }
+        });
         getViewPager();
+
+//        sliding.setPanelStat();
+
+        if (userId.length() == 0) {
+            tvSelectAddr.setText("주소지를 선택해주세요");
+        } else {
+
+        }
+
     }
 
 
@@ -141,11 +168,30 @@ public class MainCategoryActivity extends AppCompatActivity {
         }).attach();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.e(TAG, "onPause");
-        task.isCancelled();
-    }
+//    private void getMyAddressList() {
+//        cursor = helper.selectAddressData("DELIVERY_ADDR");
+//        userInfos.clear();
+//        while (cursor.moveToNext()) {
+//            String addr = cursor.getString(0);
+//            String addrDetail = cursor.getString(1);
+//            String date = cursor.getString(2);
+//
+//            UserInfo userInfo = new UserInfo(addr, addrDetail, date);
+//            userInfos.add(userInfo);
+//        }
+//    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        switch (requestCode) {
+            case SEARCH_ADDRESS_ACTIVITY:
+                if (resultCode == RESULT_OK) {
+                    String data = intent.getExtras().getString("data");
+                    if (data != null) {
+                        Log.e(TAG, data);
+                    }
+                }
+        }
+    }
 }

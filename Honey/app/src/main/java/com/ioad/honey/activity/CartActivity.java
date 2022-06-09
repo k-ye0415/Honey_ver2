@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.ioad.honey.adapter.CartListAdapter;
+import com.ioad.honey.adapter.CartAdapter;
 import com.ioad.honey.bean.Cart;
 import com.ioad.honey.R;
 import com.ioad.honey.task.DeleteNetworkTask;
@@ -45,7 +44,7 @@ public class CartActivity extends AppCompatActivity implements CartClickListener
     private String userId;
     private String allDelResult;
     private ArrayList<Cart> carts;
-    private CartListAdapter adapter;
+    private CartAdapter adapter;
     private DecimalFormat priceFormat = new DecimalFormat("###,###");
 
     @Override
@@ -179,7 +178,7 @@ public class CartActivity extends AppCompatActivity implements CartClickListener
             }else {
                 layoutCartEmpty.setVisibility(View.INVISIBLE);
                 layoutCartList.setVisibility(View.VISIBLE);
-                adapter = new CartListAdapter(CartActivity.this, R.layout.cart_list_layout, carts, this);
+                adapter = new CartAdapter(CartActivity.this, R.layout.cart_list_layout, carts, this);
                 cartList.setAdapter(adapter);
 
                 tvPriceTot.setText(priceFormat.format(totalPrice()) + "원");

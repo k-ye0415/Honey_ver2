@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ioad.honey.common.BaseFragment;
-import com.ioad.honey.adapter.DashboardViewAdapter;
+import com.ioad.honey.adapter.DashboardAdapter;
 import com.ioad.honey.R;
 import com.ioad.honey.task.ImageLoadTask;
 import com.ioad.honey.common.Constant;
@@ -25,7 +25,7 @@ public class DashboardFragment extends BaseFragment {
     private final String TAG = getClass().getSimpleName();
 
     private ViewPager viewPager;
-    private DashboardViewAdapter adapter;
+    private DashboardAdapter adapter;
     private ImageLoadTask task;
 
     private String[] imageURL = {
@@ -52,7 +52,7 @@ public class DashboardFragment extends BaseFragment {
         iv_main_week_3 = view.findViewById(R.id.iv_main_week_3);
         iv_main_event = view.findViewById(R.id.iv_main_event);
         viewPager = view.findViewById(R.id.viewPager);
-        adapter = new DashboardViewAdapter(getActivity(), imageURL);
+        adapter = new DashboardAdapter(getActivity(), imageURL);
         viewPager.setAdapter(adapter);
 
         final Handler handler = new Handler();

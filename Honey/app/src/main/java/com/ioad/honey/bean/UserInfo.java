@@ -14,6 +14,8 @@ public class UserInfo {
     String userAddrDetail;
     String cartCount;
 
+    String addInsertDate;
+
     public UserInfo(String userId, String userPw, String userNm, String userPhone, String userEmail) {
         this.userId = userId;
         this.userPw = userPw;
@@ -32,6 +34,13 @@ public class UserInfo {
         this.userAddrDetail = userAddrDetail;
         this.userEmail = userEmail;
         this.cartCount = cartCount;
+    }
+
+
+    public UserInfo(String userAddr, String userAddrDetail, String addInsertDate) {
+        this.userAddr = userAddr;
+        this.userAddrDetail = userAddrDetail;
+        this.addInsertDate = addInsertDate;
     }
 
     public UserInfo(String userId) {
@@ -109,5 +118,13 @@ public class UserInfo {
 
     public void setCartCount(String cartCount) {
         this.cartCount = cartCount;
+    }
+
+    public String getAddInsertDate() {
+        return addInsertDate;
+    }
+
+    public void setAddInsertDate(String addInsertDate) {
+        this.addInsertDate = addInsertDate;
     }
 }

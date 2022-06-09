@@ -1,5 +1,6 @@
 package com.ioad.honey.activity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,7 +50,12 @@ public class BuyHistoryActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         url = Constant.SERVER_IP + "honey/Payment_History_Select_Info.jsp?Client_cId=" + userId;
-        selectAsyncData(url);
+        if (userId.length() == 0) {
+            llHistoryList.setVisibility(View.INVISIBLE);
+            llHistoryEmpty.setVisibility(View.VISIBLE);
+        } else {
+            selectAsyncData(url);
+        }
     }
 
 //    private void selectGetData() {

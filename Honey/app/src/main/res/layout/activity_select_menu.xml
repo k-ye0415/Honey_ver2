@@ -88,8 +88,8 @@
 
                 <Button
                     android:id="@+id/btn_cart"
-                    android:layout_width="250px"
-                    android:layout_height="250px"
+                    android:layout_width="150px"
+                    android:layout_height="150px"
                     android:background="@drawable/button_add_custom"
                     app:icon="@drawable/ic_launcher_background"
                     app:iconGravity="textStart"

@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.ioad.honey.adapter.MenuRecyclerAdapter;
+import com.ioad.honey.adapter.MenuAdapter;
 import com.ioad.honey.bean.Menu;
 import com.ioad.honey.R;
 import com.ioad.honey.task.ImageLoadTask;
@@ -66,7 +66,7 @@ public class MenuFragment extends Fragment {
             layoutManager = new LinearLayoutManager(getActivity());
             rv_menu.setLayoutManager(layoutManager);
 
-            adapter = new MenuRecyclerAdapter(getActivity(), R.layout.menu_layout, menus);
+            adapter = new MenuAdapter(getActivity(), R.layout.menu_layout, menus);
             rv_menu.setAdapter(adapter);
 
         } catch (Exception e) {

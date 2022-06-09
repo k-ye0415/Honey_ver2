@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
 
-    private Button btnLoginBack, btnLogin, btnJoin;
+    private Button btnLogin, btnJoin;
+    private ImageButton btnLoginBack;
     private EditText etLoginId, etLoginPw;
     private TextView tvIdSearch, tvPwSearch;
 

@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String searchQuery = "CREATE TABLE if not exists SEARCH_LIST (INDEX_NUM INTEGER PRIMARY KEY AUTOINCREMENT, SEARCH_TEXT, SEARCH_DATE, SEARCH_DELETE)";
-        String deliveryAddr = "CREATE TABLE if not exists DELIVERY_ADDR (INDEX_NUM INTEGER PRIMARY KEY AUTOINCREMENT, ADDRESS, ADDRESS_DETAIL)";
+        String deliveryAddr = "CREATE TABLE if not exists DELIVERY_ADDR (INDEX_NUM INTEGER PRIMARY KEY AUTOINCREMENT, ADDRESS, ADDRESS_DETAIL, INSERT_DATE)";
         sqLiteDatabase.execSQL(searchQuery);
         sqLiteDatabase.execSQL(deliveryAddr);
     }
@@ -51,15 +51,22 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(insertQuery);
     }
 
-    public void insertAddressData(String tableName, String address, String addressDetail) {
+    public void insertAddressData(String tableName, String address, String addressDetail, String date) {
         db = this.getWritableDatabase();
-        String insertQuery = "INSERT INTO " + tableName + " ('ADDRESS', 'ADDRESS_DETAIL') VALUES ('" + address + "', '" + addressDetail + "');";
+        String insertQuery = "INSERT INTO " + tableName + " ('ADDRESS', 'ADDRESS_DETAIL', 'INSERT_DATE') VALUES ('" + address + "', '" + addressDetail + "', " + date + "');";
         db.execSQL(insertQuery);
     }
 
     public Cursor selectSearchData(String tableName) {
         db = this.getReadableDatabase();
         String selectQuery = "SELECT INDEX_NUM, SEARCH_TEXT,MAX(SEARCH_DATE) FROM " + tableName + " WHERE SEARCH_DELETE is NULL GROUP BY SEARCH_TEXT ORDER BY SEARCH_DATE DESC";
+        cursor = db.rawQuery(selectQuery, null);
+        return cursor;
+    }
+
+    public Cursor selectAddressData(String tableName) {
+        db = this.getReadableDatabase();
+        String selectQuery = "SELECT ADDRESS, ADDRESS_DETAIL, INSERT_DATE FROM " + tableName + " ORDER BY INSERT_DATE DESC LIMIT 0, 5";
         cursor = db.rawQuery(selectQuery, null);
         return cursor;
     }

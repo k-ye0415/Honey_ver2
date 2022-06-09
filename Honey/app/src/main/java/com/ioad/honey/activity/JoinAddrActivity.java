@@ -17,6 +17,9 @@ import com.ioad.honey.common.Util;
 import com.ioad.honey.task.AddressNetworkTask;
 import com.ioad.honey.common.Shared;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class JoinAddrActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
@@ -26,6 +29,9 @@ public class JoinAddrActivity extends AppCompatActivity {
     private String joinId, joinPw, address, addressDetail;
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
     private DBHelper helper;
+    private long now = 0;
+    private Date date = null;
+    private SimpleDateFormat dateFormat = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +80,23 @@ public class JoinAddrActivity extends AppCompatActivity {
 //                    intent1.putExtra("JOIN_ADDR", address + addressDetail);
                 Shared.setStringPrf(JoinAddrActivity.this, "JOIN_ADDR", address);
                 Shared.setStringPrf(JoinAddrActivity.this, "JOIN_ADDR_DETAIL", addressDetail);
-                helper.insertAddressData("DELIVERY_ADDR", address, addressDetail);
+                String date = getTime();
+                helper.insertAddressData("DELIVERY_ADDR", address, addressDetail, date);
                 intent1.putExtra("PAGE_INDEX", 3);
                 startActivity(intent1);
 //                }
 
             }
         });
+    }
+
+    private String getTime() {
+        String result;
+        now = System.currentTimeMillis();
+        date = new Date(now);
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        result = dateFormat.format(date);
+        return result;
     }
 
 

@@ -21,6 +21,9 @@ import com.ioad.honey.task.InsertNetworkTask;
 import com.ioad.honey.common.Constant;
 import com.ioad.honey.common.Shared;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class JoinElseFragment extends Fragment {
 
     private final String TAG = getClass().getSimpleName();
@@ -29,6 +32,9 @@ public class JoinElseFragment extends Fragment {
     private String joinId, joinPw, joinAddr, joinAddrDetail, joinName, joinPhone, joinEmail;
     private String url;
     private DBHelper helper;
+    private long now = 0;
+    private Date date = null;
+    private SimpleDateFormat dateFormat = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +70,8 @@ public class JoinElseFragment extends Fragment {
                     if (result.equals("1")) {
 //                        Toast.makeText(getActivity(), R.string.welcome, Toast.LENGTH_SHORT).show();
                         Util.showToast(getActivity(),"환영합니다");
-                        helper.insertAddressData("DELIVERY_ADDR", joinAddr, joinAddrDetail);
+                        String date = getTime();
+                        helper.insertAddressData("DELIVERY_ADDR", joinAddr, joinAddrDetail, date);
                         Shared.removeStringPrf(getActivity(), "JOIN_ID");
                         Shared.removeStringPrf(getActivity(), "JOIN_PW");
                         Shared.removeStringPrf(getActivity(), "JOIN_ADDR");
@@ -91,6 +98,15 @@ public class JoinElseFragment extends Fragment {
 
 
         return view;
+    }
+
+    private String getTime() {
+        String result;
+        now = System.currentTimeMillis();
+        date = new Date(now);
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        result = dateFormat.format(date);
+        return result;
     }
 
 

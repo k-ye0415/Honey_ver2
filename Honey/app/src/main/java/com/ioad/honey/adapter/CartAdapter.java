@@ -24,7 +24,7 @@ import com.ioad.honey.common.Listener.CartClickListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class CartListAdapter extends BaseAdapter {
+public class CartAdapter extends BaseAdapter {
 
     private final String TAG = getClass().getSimpleName();
     private Context mContext;
@@ -37,7 +37,7 @@ public class CartListAdapter extends BaseAdapter {
     private String url;
     private ImageLoadTask task;
 
-    public CartListAdapter(Context mContext, int layout, ArrayList<Cart> carts, CartClickListener cartClickListener) {
+    public CartAdapter(Context mContext, int layout, ArrayList<Cart> carts, CartClickListener cartClickListener) {
         this.mContext = mContext;
         this.layout = layout;
         this.carts = carts;

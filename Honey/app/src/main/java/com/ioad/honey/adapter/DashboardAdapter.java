@@ -12,14 +12,14 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.ioad.honey.R;
 import com.ioad.honey.task.ImageLoadTask;
 
-public class DashboardViewAdapter extends PagerAdapter {
+public class DashboardAdapter extends PagerAdapter {
 
     private final String TAG = getClass().getSimpleName();
     private Context mContext;
     private String[] imageURL;
     private ImageView ivDashboard;
 
-    public DashboardViewAdapter(Context mContext, String[] namesArr) {
+    public DashboardAdapter(Context mContext, String[] namesArr) {
         this.mContext = mContext;
         this.imageURL = namesArr;
     }

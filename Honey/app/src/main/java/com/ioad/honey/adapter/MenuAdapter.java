@@ -19,7 +19,7 @@ import com.ioad.honey.common.Constant;
 
 import java.util.ArrayList;
 
-public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapter.ViewHolder> {
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
     final String TAG = getClass().getSimpleName();
 
@@ -30,7 +30,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
     private ImageLoadTask task;
 
 
-    public MenuRecyclerAdapter(Context mContext, int layout, ArrayList<Menu> data) {
+    public MenuAdapter(Context mContext, int layout, ArrayList<Menu> data) {
         this.mContext = mContext;
         this.layout = layout;
         this.data = data;
