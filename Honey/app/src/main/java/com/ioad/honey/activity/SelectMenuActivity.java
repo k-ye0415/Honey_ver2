@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.ioad.honey.adapter.IngredientAdapter;
 import com.ioad.honey.bean.Ingredient;
 import com.ioad.honey.R;
+import com.ioad.honey.common.Util;
 import com.ioad.honey.task.ImageLoadTask;
 import com.ioad.honey.task.InsertNetworkTask;
 import com.ioad.honey.task.SelectNetworkTask;
@@ -99,7 +100,7 @@ public class SelectMenuActivity extends AppCompatActivity {
             ArrayList<String> nameArr = new ArrayList<>();
             codeArr = Shared.getStringArrayPref(SelectMenuActivity.this, "SELECT_CODE");
             nameArr = Shared.getStringArrayPref(SelectMenuActivity.this, "SELECT_NAME");
-            // Login 부터하자
+
             for (int i = 0; i < codeArr.size(); i++) {
                 url = Constant.SERVER_URL_JSP + "ingredient_cart_insert.jsp?id=" + userId + "&iCode=" + codeArr.get(i) + "&mCode=" + selectCode;
                 Log.d("TAG", "cart Insert url : " + url);
@@ -108,9 +109,11 @@ public class SelectMenuActivity extends AppCompatActivity {
 
             if (result.equals("1")) {
                 if (codeArr.size() == 1) {
-                    Toast.makeText(SelectMenuActivity.this, "장바구니 담기 완료", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(SelectMenuActivity.this, "장바구니 담기 완료", Toast.LENGTH_SHORT).show();
+                    Util.showToast(SelectMenuActivity.this, "장바구니 담기 완료");
                 } else {
-                    Toast.makeText(SelectMenuActivity.this, nameArr.get(0) + "외 " + codeArr.size() + R.string.cart_add, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(SelectMenuActivity.this, nameArr.get(0) + "외 " + codeArr.size() + "장바구니 담기 완료", Toast.LENGTH_SHORT).show();
+                    Util.showToast(SelectMenuActivity.this, nameArr.get(0) + "외 " + codeArr.size() + "장바구니 담기 완료");
                 }
                 Shared.removeStringArrayPref(SelectMenuActivity.this, "SELECT_CODE");
                 Shared.removeStringArrayPref(SelectMenuActivity.this, "SELECT_NAME");
@@ -130,7 +133,6 @@ public class SelectMenuActivity extends AppCompatActivity {
     private String tipCount(){
         String count = null;
         url = Constant.SERVER_URL_JSP + "tip_count_select.jsp?code=" + selectCode;
-        Log.e("TAG", "url :::::::: " + url);
         try {
             SelectNetworkTask networkTask = new SelectNetworkTask(SelectMenuActivity.this, url, "count", "tip");
             Object obj = networkTask.execute().get();

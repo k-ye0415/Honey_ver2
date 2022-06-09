@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.ioad.honey.R;
 import com.ioad.honey.common.Constant;
 import com.ioad.honey.common.Shared;
+import com.ioad.honey.common.Util;
 import com.ioad.honey.task.AddressNetworkTask;
 import com.ioad.honey.task.UpdateNetworkTask;
 
@@ -86,7 +88,8 @@ public class MyPageEditActivity extends AppCompatActivity {
                         Intent intent = new Intent(MyPageEditActivity.this, DaumActivity.class);
                         startActivityForResult(intent, SEARCH_ADDRESS_ACTIVITY);
                     } else {
-                        Toast.makeText(MyPageEditActivity.this, R.string.check_internet, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MyPageEditActivity.this, R.string.check_internet, Toast.LENGTH_SHORT).show();
+                        Util.showToast(MyPageEditActivity.this, "인터넷 연결을 확인해주세요");
                         finish();
                     }
                     break;
@@ -107,7 +110,8 @@ public class MyPageEditActivity extends AppCompatActivity {
                             + "&userId=" + userId;
                     String result = updateUserInfo(tempURL);
                     if (result.equals("1")) {
-                        Toast.makeText(MyPageEditActivity.this, "수정 완료 되었습니다", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MyPageEditActivity.this, "수정 완료 되었습니다", Toast.LENGTH_SHORT).show();
+                        Util.showToast(MyPageEditActivity.this, "수정 완료 되었습니다");
                     }
                     break;
                 case R.id.btn_logout:
@@ -163,7 +167,8 @@ public class MyPageEditActivity extends AppCompatActivity {
                 Intent intent = new Intent(MyPageEditActivity.this, MainCategoryActivity.class);
                 Shared.removeStringPrf(MyPageEditActivity.this, "USER_ID");
                 startActivity(intent);
-                Toast.makeText(MyPageEditActivity.this, "로그아웃 완료. 다음에 만나요~", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MyPageEditActivity.this, "로그아웃 완료. 다음에 만나요~", Toast.LENGTH_SHORT).show();
+                Util.showToast(MyPageEditActivity.this, "로그아웃 완료. 다음에 만나요~");
             }
         });
     }

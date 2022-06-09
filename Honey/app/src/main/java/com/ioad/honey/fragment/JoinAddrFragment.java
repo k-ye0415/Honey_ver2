@@ -3,6 +3,7 @@ package com.ioad.honey.fragment;
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.ioad.honey.activity.JoinAddrActivity;
 import com.ioad.honey.R;
+import com.ioad.honey.common.Util;
 import com.ioad.honey.task.AddressNetworkTask;
 
 public class JoinAddrFragment extends Fragment {
@@ -44,7 +46,8 @@ public class JoinAddrFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), JoinAddrActivity.class);
                     startActivityForResult(intent, SEARCH_ADDRESS_ACTIVITY);
                 } else {
-                    Toast.makeText(getActivity(), R.string.check_internet, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), R.string.check_internet, Toast.LENGTH_SHORT).show();
+                    Util.showToast(getActivity(), "인터넷을 확인해주세요");
                 }
             }
         });

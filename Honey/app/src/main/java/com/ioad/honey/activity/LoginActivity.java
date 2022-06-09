@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 import com.ioad.honey.bean.UserInfo;
 import com.ioad.honey.R;
+import com.ioad.honey.common.Util;
 import com.ioad.honey.task.LoginNetworkTask;
 import com.ioad.honey.common.Constant;
 import com.ioad.honey.common.Shared;
+import com.ioad.honey.task.SelectNetworkTask;
 
 import java.util.ArrayList;
 
@@ -61,7 +63,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (etLoginId.getText() == null || etLoginPw.getText() == null) {
-                    Toast.makeText(LoginActivity.this, R.string.check_login, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(LoginActivity.this, R.string.check_login, Toast.LENGTH_SHORT).show();
+                    Util.showToast(LoginActivity.this, "아이디 및 비밀번호를 입력해주세요");
                 } else {
                     userId = etLoginId.getText().toString();
                     userPw = etLoginPw.getText().toString();
@@ -78,12 +81,13 @@ public class LoginActivity extends AppCompatActivity {
     private void checkLogin() {
         try {
             url = Constant.SERVER_IP +  "honey/honey_login_confirm_j.jsp?cId=" + userId + "&cPw=" + userPw;
-            LoginNetworkTask task = new LoginNetworkTask(LoginActivity.this, url, "login", "login");
+            SelectNetworkTask task = new SelectNetworkTask(LoginActivity.this, url, "login", "login_info");
             Object obj = task.execute().get();
             userInfos = (ArrayList<UserInfo>) obj;
 
             if (userInfos == null) {
-                Toast.makeText(LoginActivity.this, R.string.false_login, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(LoginActivity.this, R.string.false_login, Toast.LENGTH_SHORT).show();
+                Util.showToast(LoginActivity.this, "아이디 및 비밀번호를 확인해주세요");
             } else {
                 String id = userInfos.get(0).getUserId();
                 Shared.setStringPrf(LoginActivity.this, "USER_ID", id);

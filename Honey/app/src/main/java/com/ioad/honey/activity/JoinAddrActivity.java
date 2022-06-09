@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ioad.honey.R;
+import com.ioad.honey.common.Util;
 import com.ioad.honey.task.AddressNetworkTask;
 import com.ioad.honey.common.Shared;
 
@@ -48,7 +49,8 @@ public class JoinAddrActivity extends AppCompatActivity {
                     Intent intent = new Intent(JoinAddrActivity.this, DaumActivity.class);
                     startActivityForResult(intent,SEARCH_ADDRESS_ACTIVITY );
                 } else {
-                    Toast.makeText(JoinAddrActivity.this, R.string.check_internet, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(JoinAddrActivity.this, R.string.check_internet, Toast.LENGTH_SHORT).show();
+                    Util.showToast(JoinAddrActivity.this, "인터넷 연결을 확인해주세요");
                 }
             }
         });

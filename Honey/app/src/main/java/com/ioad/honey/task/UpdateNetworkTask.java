@@ -31,12 +31,12 @@ public class UpdateNetworkTask extends AsyncTask<Integer, String, Object> {
         BufferedReader bufferedReader = null;
         String result = null;
 
-        try{
+        try {
             URL url = new URL(urlStr);
 
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setConnectTimeout(10000);
-            if(httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 inputStream = httpURLConnection.getInputStream();
                 inputStreamReader = new InputStreamReader(inputStream);
                 bufferedReader = new BufferedReader(inputStreamReader);
@@ -46,41 +46,30 @@ public class UpdateNetworkTask extends AsyncTask<Integer, String, Object> {
                     if (strLine == null) break;
                     stringBuffer.append(strLine + "\n");
                 }
-//                if (where.equals("select")) {
-//                    parserSelect(stringBuffer.toString());
-//                    //리턴값없고
-//                } else if (where.equals("login")){
-//                    parserlogin(stringBuffer.toString());
-//                } else if (where.equals("id_find")){
-//                    parserid_find(stringBuffer.toString());
-//                } else if (where.equals("pw_find")){
-//                    parserpw_find(stringBuffer.toString());
-//                } else {
                 result = parserAction(stringBuffer.toString());
-                //리턴값있어
-//                }
+
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (bufferedReader != null) bufferedReader.close();
                 if (inputStreamReader != null) inputStreamReader.close();
                 if (inputStream != null) inputStream.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return result;
     }
 
-    private String parserAction(String str){
+    private String parserAction(String str) {
         String returnValue = null;
         try {
             JSONObject jsonObject = new JSONObject(str);
             returnValue = jsonObject.getString("result");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return returnValue;

@@ -112,10 +112,7 @@ public class CartActivity extends AppCompatActivity implements CartClickListener
             switch (view.getId()) {
                 case R.id.ib_cart_delivery_tip:
                     new AlertDialog.Builder(view.getContext())
-                            .setMessage("배달팁 안내!\n\n주문금액                                                  "+
-                                    "배달팁\n30,000원~                                            무료배송\n" +
-                                    "10,000원~30,000원                             3,000원\n" +
-                                    "*최소주문금액은 10,000원입니다.")
+                            .setMessage(R.string.tip_info)
                             .setCancelable(true)
                             .show();
                     break;

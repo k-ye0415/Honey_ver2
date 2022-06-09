@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ioad.honey.R;
-import com.ioad.honey.bean.ButHistory;
+import com.ioad.honey.bean.BuyHistory;
 
 import java.util.ArrayList;
 
@@ -18,9 +18,9 @@ public class BuyHistoryAdapter extends RecyclerView.Adapter<BuyHistoryAdapter.Vi
 
     private Context mContext;
     private int layout = 0;
-    private ArrayList<ButHistory> histories = null;
+    private ArrayList<BuyHistory> histories = null;
 
-    public BuyHistoryAdapter(Context mContext, int layout, ArrayList<ButHistory> histories) {
+    public BuyHistoryAdapter(Context mContext, int layout, ArrayList<BuyHistory> histories) {
         this.mContext = mContext;
         this.layout = layout;
         this.histories = histories;

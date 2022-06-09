@@ -39,8 +39,6 @@ public class JoinActivity extends FragmentActivity {
                 break;
             case 2:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frg_join, joinFragment).commit();
-//                getSupportFragmentManager().beginTransaction().remove(joinFragment).commit();
-//                getSupportFragmentManager().beginTransaction().replace(R.id.frg_join, joinAddrFragment).commit();
                 break;
             case 3:
                 getSupportFragmentManager().beginTransaction().remove(joinFragment).commit();

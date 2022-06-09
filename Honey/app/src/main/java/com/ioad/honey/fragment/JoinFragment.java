@@ -18,6 +18,7 @@ import com.ioad.honey.activity.JoinActivity;
 import com.ioad.honey.activity.JoinAddrActivity;
 import com.ioad.honey.bean.UserInfo;
 import com.ioad.honey.R;
+import com.ioad.honey.common.Util;
 import com.ioad.honey.task.LoginNetworkTask;
 import com.ioad.honey.common.Constant;
 import com.ioad.honey.common.Shared;
@@ -49,9 +50,11 @@ public class JoinFragment extends Fragment {
                 joinId = etJoinId.getText().toString().trim();
                 joinPw = etJoinPw.getText().toString().trim();
                 if (joinId.equals("")) {
-                    Toast.makeText(getActivity(), R.string.check_id, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), R.string.check_id, Toast.LENGTH_SHORT).show();
+                    Util.showToast(getActivity(), "아이디를 입력해주세요");
                 } else if (joinPw.equals("")) {
-                    Toast.makeText(getActivity(), R.string.check_pw, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), R.string.check_pw, Toast.LENGTH_SHORT).show();
+                    Util.showToast(getActivity(), "비밀번호를 입력해주세요");
                 } else if (!joinId.equals("") && !joinPw.equals("")) {
                     url = Constant.SERVER_IP + "honey/honey_login_confirm_j.jsp?cId=" + joinId + "&cPw=" + joinPw;
                     userInfos = new ArrayList<>();
@@ -86,7 +89,8 @@ public class JoinFragment extends Fragment {
             userInfos = (ArrayList<UserInfo>) obj;
 
             if (userInfos != null) {
-                Toast.makeText(getActivity(), R.string.overlap_id, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), R.string.overlap_id, Toast.LENGTH_SHORT).show();
+                Util.showToast(getActivity(), "사용중인 아이디입니다");
             } else {
                 Intent intent = new Intent(getActivity(), JoinAddrActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

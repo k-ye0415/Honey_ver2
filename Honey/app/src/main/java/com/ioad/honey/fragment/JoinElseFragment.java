@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.ioad.honey.activity.MainCategoryActivity;
 import com.ioad.honey.R;
+import com.ioad.honey.common.Util;
 import com.ioad.honey.task.InsertNetworkTask;
 import com.ioad.honey.common.Constant;
 import com.ioad.honey.common.Shared;
@@ -44,7 +45,8 @@ public class JoinElseFragment extends Fragment {
                 joinEmail = etJoinEmail.getText().toString().trim();
 
                 if (joinName.equals("") || joinPhone.equals("") || joinEmail.equals("")) {
-                    Toast.makeText(getActivity(), R.string.else_empty_check, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), R.string.else_empty_check, Toast.LENGTH_SHORT).show();
+                    Util.showToast(getActivity(), "이름, 전화번호, 이메일을 입력해주세요");
                 } else {
                     joinId = Shared.getStringPref(getActivity(), "JOIN_ID");
                     joinPw = Shared.getStringPref(getActivity(), "JOIN_PW");
@@ -68,7 +70,8 @@ public class JoinElseFragment extends Fragment {
                     Log.e("TAG", "joinURL : " + url);
                     String result = insertJoinUser();
                     if (result.equals("1")) {
-                        Toast.makeText(getActivity(), R.string.welcome, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), R.string.welcome, Toast.LENGTH_SHORT).show();
+                        Util.showToast(getActivity(),"환영합니다");
                         Shared.removeStringPrf(getActivity(), "JOIN_ID");
                         Shared.removeStringPrf(getActivity(), "JOIN_PW");
                         Shared.removeStringPrf(getActivity(), "JOIN_ADDR");
@@ -78,7 +81,8 @@ public class JoinElseFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), MainCategoryActivity.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(getActivity(), R.string.join_false, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), R.string.join_false, Toast.LENGTH_SHORT).show();
+                        Util.showToast(getActivity(), "오류로 인해 다시 시도해주세요");
                         Shared.removeStringPrf(getActivity(), "JOIN_ID");
                         Shared.removeStringPrf(getActivity(), "JOIN_PW");
                         Shared.removeStringPrf(getActivity(), "JOIN_ADDR");

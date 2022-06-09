@@ -1,6 +1,6 @@
 package com.ioad.honey.bean;
 
-public class ButHistory {
+public class BuyHistory {
 
     String buyNm;
     String buyDeliveryPrice;
@@ -11,7 +11,7 @@ public class ButHistory {
     String iUnit;
     String count;
 
-    public ButHistory(String buyNm, String buyDeliveryPrice, String buyDay, String buyCancelDay, String iName, String iCapacity, String iUnit, String count) {
+    public BuyHistory(String buyNm, String buyDeliveryPrice, String buyDay, String buyCancelDay, String iName, String iCapacity, String iUnit, String count) {
         this.buyNm = buyNm;
         this.buyDeliveryPrice = buyDeliveryPrice;
         this.buyDay = buyDay;

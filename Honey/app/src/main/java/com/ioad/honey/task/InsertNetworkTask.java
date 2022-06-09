@@ -46,19 +46,8 @@ public class InsertNetworkTask extends AsyncTask<Integer, String, Object> {
                     if (strLine == null) break;
                     stringBuffer.append(strLine + "\n");
                 }
-//                if (where.equals("select")) {
-//                    parserSelect(stringBuffer.toString());
-//                    //리턴값없고
-//                } else if (where.equals("login")){
-//                    parserlogin(stringBuffer.toString());
-//                } else if (where.equals("id_find")){
-//                    parserid_find(stringBuffer.toString());
-//                } else if (where.equals("pw_find")){
-//                    parserpw_find(stringBuffer.toString());
-//                } else {
-                    result = parserAction(stringBuffer.toString());
-                    //리턴값있어
-//                }
+                result = parserAction(stringBuffer.toString());
+
             }
 
         }catch (Exception e){

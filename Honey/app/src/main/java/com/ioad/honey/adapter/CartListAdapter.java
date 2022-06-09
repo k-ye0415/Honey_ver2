@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.ioad.honey.bean.Cart;
 import com.ioad.honey.R;
+import com.ioad.honey.common.Util;
 import com.ioad.honey.task.ImageLoadTask;
 import com.ioad.honey.task.UpdateNetworkTask;
 import com.ioad.honey.common.Constant;
@@ -89,7 +90,8 @@ public class CartListAdapter extends BaseAdapter {
             public void onClick(View view) {
                 count = Integer.parseInt(String.valueOf(ingredientCount.getText()));
                 if (count == 1) {
-                    Toast.makeText(mContext, R.string.cart_min, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, R.string.cart_min, Toast.LENGTH_SHORT).show();
+                    Util.showToast(mContext, "최소 구매 수량입니다");
                 } else {
                     count -= 1;
                     ingredientCount.setText(String.valueOf(count));
@@ -104,7 +106,8 @@ public class CartListAdapter extends BaseAdapter {
             public void onClick(View view) {
                 count = Integer.parseInt(String.valueOf(ingredientCount.getText()));
                 if (count == 10) {
-                    Toast.makeText(mContext, R.string.cart_max, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, R.string.cart_max, Toast.LENGTH_SHORT).show();
+                    Util.showToast(mContext, "최대 구매 수량입니다");
                 } else {
                     count += 1;
                     ingredientCount.setText(String.valueOf(count));

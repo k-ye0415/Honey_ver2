@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.ioad.honey.R;
+import com.ioad.honey.common.Util;
 
 public class TOSFragment extends Fragment {
 
@@ -115,7 +116,8 @@ public class TOSFragment extends Fragment {
                 case R.id.btn_TOS_finish:
                     if (cbFirst.isChecked() == false || cbSecond.isChecked() == false
                             || cbThird.isChecked() == false || cbAll.isChecked() == false) {
-                        Toast.makeText(getActivity(), R.string.agree_TOS, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), R.string.agree_TOS, Toast.LENGTH_SHORT).show();
+                        Util.showToast(getActivity(), "약관에 동의해주세요");
                     } else {
                         JoinFragment joinFragment = new JoinFragment();
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

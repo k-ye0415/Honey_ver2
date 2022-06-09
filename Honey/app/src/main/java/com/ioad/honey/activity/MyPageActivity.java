@@ -120,18 +120,6 @@ public class MyPageActivity extends AppCompatActivity {
             userAddrDetail = userInfos.get(0).getUserAddrDetail();
             userEmail = userInfos.get(0).getUserEmail();
 
-            Log.e("TAG", "getUserInfo :: ----------------- ");
-            Log.e("TAG", "userPw :: " + userPw);
-            Log.e("TAG", "userNm :: " + userNm);
-            Log.e("TAG", "userPhone :: " + userPhone);
-            Log.e("TAG", "userPost :: " + userPost);
-            Log.e("TAG", "userAddr :: " + userAddr);
-            Log.e("TAG", "userAddrDetail :: " + userAddrDetail);
-            Log.e("TAG", "userEmail :: " + userEmail);
-            Log.e("TAG", "getUserInfo :: ----------------- ");
-
-
-
             tvUserName.setText(userNm + "님");
             btnGoCart.setText(userInfos.get(0).getCartCount());
 

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ioad.honey.bean.Tip;
 import com.ioad.honey.R;
+import com.ioad.honey.common.Util;
 import com.ioad.honey.task.DeleteNetworkTask;
 import com.ioad.honey.common.Constant;
 import com.ioad.honey.common.Shared;
@@ -118,13 +119,15 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
                                 String result = tipDeleted();
                                 if (result.equals("1")) {
 //                                    deleteOnClickListener.onDeleteClickListener(true);
-                                    Toast.makeText(mContext, R.string.tip_remove, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(mContext, R.string.tip_remove, Toast.LENGTH_SHORT).show();
+                                    Util.showToast(mContext, "꿀팁 삭제 완료");
                                 }
                                 deleteDialog.dismiss();
                             }
                         });
                     } else {
-                        Toast.makeText(mContext, R.string.self_tip_remove, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, R.string.self_tip_remove, Toast.LENGTH_SHORT).show();
+                        Util.showToast(mContext, "내가 쓴 꿀팁만 삭제 가능해요");
                     }
 
                 }

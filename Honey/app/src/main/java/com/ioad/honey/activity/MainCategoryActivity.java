@@ -20,6 +20,7 @@ import com.ioad.honey.adapter.TabPagerAdapter;
 import com.ioad.honey.R;
 import com.ioad.honey.common.DBHelper;
 import com.ioad.honey.common.Shared;
+import com.ioad.honey.common.Util;
 import com.ioad.honey.task.ImageLoadTask;
 
 public class MainCategoryActivity extends AppCompatActivity {
@@ -60,7 +61,8 @@ public class MainCategoryActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.tab_cart:
                         if (userId.length() == 0) {
-                            Toast.makeText(mContext, R.string.please_login, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(mContext, R.string.please_login, Toast.LENGTH_SHORT).show();
+                            Util.showToast(mContext, "로그인 해주세요");
                         } else {
                             intent = new Intent(mContext, CartActivity.class);
                             startActivity(intent);
@@ -102,31 +104,31 @@ public class MainCategoryActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         tab.setIcon(android.R.drawable.ic_btn_speak_now);
-                        tab.setText("HOME");
+                        tab.setText(R.string.category_home);
                         break;
                     case 1:
                         tab.setIcon(android.R.drawable.ic_btn_speak_now);
-                        tab.setText("한식");
+                        tab.setText(R.string.category_korean);
                         break;
                     case 2:
                         tab.setIcon(android.R.drawable.ic_btn_speak_now);
-                        tab.setText("분식");
+                        tab.setText(R.string.category_school);
                         break;
                     case 3:
                         tab.setIcon(android.R.drawable.ic_btn_speak_now);
-                        tab.setText("탕");
+                        tab.setText(R.string.category_soup);
                         break;
                     case 4:
                         tab.setIcon(android.R.drawable.ic_btn_speak_now);
-                        tab.setText("인스턴트");
+                        tab.setText(R.string.category_instant);
                         break;
                     case 5:
                         tab.setIcon(android.R.drawable.ic_btn_speak_now);
-                        tab.setText("디저트");
+                        tab.setText(R.string.category_dessert);
                         break;
                     case 6:
                         tab.setIcon(android.R.drawable.ic_btn_speak_now);
-                        tab.setText("채식");
+                        tab.setText(R.string.category_vegan);
                         break;
                 }
             }

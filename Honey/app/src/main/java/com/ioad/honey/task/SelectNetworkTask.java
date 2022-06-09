@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.ioad.honey.bean.ButHistory;
+import com.ioad.honey.bean.BuyHistory;
 import com.ioad.honey.bean.Cart;
 import com.ioad.honey.bean.Ingredient;
 import com.ioad.honey.bean.Menu;
@@ -29,12 +29,19 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
     private Context mContext;
     private String mAddr;
     private ArrayList<Menu> menus;
+    private Menu menu;
     private ArrayList<Tip> tips;
+    private Tip tip;
     private ArrayList<Ingredient> ingredients;
+    private Ingredient ingredient;
     private ArrayList<Cart> carts;
-    private ArrayList<ButHistory> histories;
+    private Cart cart;
+    private ArrayList<BuyHistory> histories;
+    private BuyHistory history;
     private ArrayList<UserInfo> userInfos;
+    private UserInfo userInfo;
     private ArrayList<Search> searches;
+    private Search search;
     private String where;
     private String kind;
 
@@ -45,14 +52,14 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
         this.kind = kind;
 
         switch (this.kind) {
-            case "tip" :
+            case "tip":
             case "MypageCart":
                 this.tips = new ArrayList<>();
                 break;
             case "food":
                 this.menus = new ArrayList<>();
                 break;
-            case "ingredient" :
+            case "ingredient":
                 this.ingredients = new ArrayList<>();
                 break;
             case "carts_info":
@@ -62,6 +69,7 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
                 this.histories = new ArrayList<>();
                 break;
             case "myPage":
+            case "login_info":
                 this.userInfos = new ArrayList<>();
                 break;
             case "kfood":
@@ -126,7 +134,7 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
 
         if (where.equals("select") && kind.equals("tip")) {
             return tips;
-        } else if (where.equals("select") && kind.equals("food")){
+        } else if (where.equals("select") && kind.equals("food")) {
             return menus;
         } else if (where.equals("select") && kind.equals("ingredient")) {
             return ingredients;
@@ -140,8 +148,9 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
             return userInfos;
         } else if (where.equals("select") && kind.equals("kfood")) {
             return searches;
-        }
-        else {
+        } else if (where.equals("select") && kind.equals("login_info")) {
+            return userInfos;
+        } else {
             return result;
         }
     }
@@ -151,39 +160,33 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
         try {
             JSONObject jsonObject = new JSONObject(str);
             JSONArray jsonArray = new JSONArray(jsonObject.getString(kind));
-
-
+            JSONObject resultJSON;
 
             switch (kind) {
                 case "tip":
                     tips.clear();
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                        String code = jsonObject1.getString("code");
-                        String cId = jsonObject1.getString("id");
-                        String cName = jsonObject1.getString("name");
-                        String content = jsonObject1.getString("content");
+                        resultJSON = (JSONObject) jsonArray.get(i);
+                        String code = resultJSON.getString("code");
+                        String cId = resultJSON.getString("id");
+                        String cName = resultJSON.getString("name");
+                        String content = resultJSON.getString("content");
 
 
-                        Tip tip = new Tip(code, cId, cName, content);
+                        tip = new Tip(code, cId, cName, content);
                         tips.add(tip);
                     }
                     break;
-                case "food" :
+                case "food":
                     menus.clear();
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                        String code = jsonObject1.getString("code");
-                        String category = jsonObject1.getString("category");
-                        String name = jsonObject1.getString("name");
-                        String image1 = jsonObject1.getString("image1");
+                        resultJSON = (JSONObject) jsonArray.get(i);
+                        String code = resultJSON.getString("code");
+                        String category = resultJSON.getString("category");
+                        String name = resultJSON.getString("name");
+                        String image1 = resultJSON.getString("image1");
 
-                        Log.d(TAG, "code ::: " + code);
-                        Log.d(TAG, "category ::: " + category);
-                        Log.d(TAG, "name ::: " + name);
-                        Log.d(TAG, "image1 ::: " + image1);
-
-                        Menu menu = new Menu(code, category, name, image1);
+                        menu = new Menu(code, category, name, image1);
                         menus.add(menu);
 
                     }
@@ -191,104 +194,115 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
                 case "ingredient":
                     ingredients.clear();
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                        String code = jsonObject1.getString("code");
-                        String name = jsonObject1.getString("name");
-                        String capacity = jsonObject1.getString("capacity");
-                        String unit = jsonObject1.getString("unit");
-                        String price = jsonObject1.getString("price");
+                        resultJSON = (JSONObject) jsonArray.get(i);
+                        String code = resultJSON.getString("code");
+                        String name = resultJSON.getString("name");
+                        String capacity = resultJSON.getString("capacity");
+                        String unit = resultJSON.getString("unit");
+                        String price = resultJSON.getString("price");
                         boolean isChecked = false;
 
-                        Ingredient ingredient = new Ingredient(isChecked, code, name, capacity, unit, price);
+                        ingredient = new Ingredient(isChecked, code, name, capacity, unit, price);
                         ingredients.add(ingredient);
                     }
                     break;
                 case "carts_info":
                     carts.clear();
-                    for (int i=0; i<jsonArray.length(); i++){
-                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        resultJSON = (JSONObject) jsonArray.get(i);
 
-                        int cartCode = jsonObject1.getInt("cartCode");
-                        int cartEA = jsonObject1.getInt("cartEA");
-                        String iName = jsonObject1.getString("iName");
-                        String iCapacity = jsonObject1.getString("iCapacity");
-                        String iUnit = jsonObject1.getString("iUnit");
-                        int iPrice = jsonObject1.getInt("iPrice");
-                        String mName = jsonObject1.getString("mName");
-                        String mImagePath = jsonObject1.getString("mImagePath");
+                        int cartCode = resultJSON.getInt("cartCode");
+                        int cartEA = resultJSON.getInt("cartEA");
+                        String iName = resultJSON.getString("iName");
+                        String iCapacity = resultJSON.getString("iCapacity");
+                        String iUnit = resultJSON.getString("iUnit");
+                        int iPrice = resultJSON.getInt("iPrice");
+                        String mName = resultJSON.getString("mName");
+                        String mImagePath = resultJSON.getString("mImagePath");
 
-                        Cart cart = new Cart(cartCode, cartEA, iName, iCapacity, iUnit, iPrice, mName, mImagePath);
+                        cart = new Cart(cartCode, cartEA, iName, iCapacity, iUnit, iPrice, mName, mImagePath);
                         carts.add(cart);
                     }
                     break;
                 case "paymentHistory_info":
                     histories.clear();
-                    for (int i=0; i<jsonArray.length(); i++){
-                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        resultJSON = (JSONObject) jsonArray.get(i);
 
-                        String buyNum = jsonObject1.getString("buyNum");
-                        String buyDeliveryPrice = jsonObject1.getString("buyDeliveryPrice");
-                        String buyDay = jsonObject1.getString("buyDay");
-                        String buyCencelDay = jsonObject1.getString("buyCencelDay");
-                        String iName = jsonObject1.getString("iName");
-                        String iCapacity = jsonObject1.getString("iCapacity");
-                        String iUnit = jsonObject1.getString("iUnit");
-                        String count = jsonObject1.getString("count");
+                        String buyNum = resultJSON.getString("buyNum");
+                        String buyDeliveryPrice = resultJSON.getString("buyDeliveryPrice");
+                        String buyDay = resultJSON.getString("buyDay");
+                        String buyCencelDay = resultJSON.getString("buyCencelDay");
+                        String iName = resultJSON.getString("iName");
+                        String iCapacity = resultJSON.getString("iCapacity");
+                        String iUnit = resultJSON.getString("iUnit");
+                        String count = resultJSON.getString("count");
 
-                        ButHistory history = new ButHistory(buyNum, buyDeliveryPrice, buyDay, buyCencelDay, iName, iCapacity, iUnit, count);
+                        history = new BuyHistory(buyNum, buyDeliveryPrice, buyDay, buyCencelDay, iName, iCapacity, iUnit, count);
                         histories.add(history);
                     }
                     break;
                 case "MypageCart":
                     tips.clear();
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+                        resultJSON = (JSONObject) jsonArray.get(i);
 
-                        String userId = jsonObject1.getString("Client_cId");
-                        String mCode = jsonObject1.getString("mCode");
-                        String mName = jsonObject1.getString("mName");
-                        String tipContent = jsonObject1.getString("tipContent");
-                        String tipAddDay = jsonObject1.getString("tipAddDay");
+                        String userId = resultJSON.getString("Client_cId");
+                        String mCode = resultJSON.getString("mCode");
+                        String mName = resultJSON.getString("mName");
+                        String tipContent = resultJSON.getString("tipContent");
+                        String tipAddDay = resultJSON.getString("tipAddDay");
 
-                        Tip tip = new Tip(userId, mCode, mName, tipContent, tipAddDay);
+                        tip = new Tip(userId, mCode, mName, tipContent, tipAddDay);
                         tips.add(tip);
 
                     }
                     break;
                 case "myPage":
                     userInfos.clear();
-                    JSONObject jsonObject1 = (JSONObject) jsonArray.get(0);
-                    String userId = jsonObject1.getString("userId");
-                    String userPw = jsonObject1.getString("userPw");
-                    String userName = jsonObject1.getString("userName");
-                    String userTel = jsonObject1.getString("userTel");
-                    String userPostNum = jsonObject1.getString("userPostNum").equals("null")
+                    resultJSON = (JSONObject) jsonArray.get(0);
+                    String userId = resultJSON.getString("userId");
+                    String userPw = resultJSON.getString("userPw");
+                    String userName = resultJSON.getString("userName");
+                    String userTel = resultJSON.getString("userTel");
+                    String userPostNum = resultJSON.getString("userPostNum").equals("null")
                             ? "00000"
-                            : jsonObject1.getString("userPostNum");
-                    String userAddress1 = jsonObject1.getString("userAddress1");
-                    String userAddress2 = jsonObject1.getString("userAddress2");
-                    String userEmail = jsonObject1.getString("userEmail");
-                    String cartCount = jsonObject1.getString("cartCount");
+                            : resultJSON.getString("userPostNum");
+                    String userAddress1 = resultJSON.getString("userAddress1");
+                    String userAddress2 = resultJSON.getString("userAddress2");
+                    String userEmail = resultJSON.getString("userEmail");
+                    String cartCount = resultJSON.getString("cartCount");
 
-                    UserInfo userInfo = new UserInfo(userId, userPw, userName, userTel, userPostNum, userAddress1, userAddress2, userEmail, cartCount);
+                    userInfo = new UserInfo(userId, userPw, userName, userTel, userPostNum, userAddress1, userAddress2, userEmail, cartCount);
                     userInfos.add(userInfo);
                     break;
                 case "kfood":
+                    searches.clear();
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject2 = (JSONObject) jsonArray.get(i);
-                        String menuCode = jsonObject2.getString("mCode");
-                        String menuCategory = jsonObject2.getString("mCategory");
-                        String menuName = jsonObject2.getString("mName");
-                        String menuImage1 = jsonObject2.getString("mImagePath");
-                        String menuAddDay = jsonObject2.getString("mAddDay");
-                        String menuImage2 = jsonObject2.getString("mImage2");
+                        resultJSON = (JSONObject) jsonArray.get(i);
+                        String menuCode = resultJSON.getString("mCode");
+                        String menuCategory = resultJSON.getString("mCategory");
+                        String menuName = resultJSON.getString("mName");
+                        String menuImage1 = resultJSON.getString("mImagePath");
+                        String menuAddDay = resultJSON.getString("mAddDay");
+                        String menuImage2 = resultJSON.getString("mImage2");
 
                         Search search = new Search(menuCode, menuCategory, menuName, menuImage1, menuAddDay, menuImage2);
                         searches.add(search);
                     }
                     break;
-            }
+                case "login_info":
+                    userInfos.clear();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        resultJSON = (JSONObject) jsonArray.get(i);
+                        String userID = resultJSON.getString("cId");
 
+                        userInfo = new UserInfo(userID);
+                        userInfos.add(userInfo);
+
+                    }
+                    break;
+            }
 
 
         } catch (Exception e) {
@@ -301,7 +315,7 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
         try {
             JSONObject jsonObject = new JSONObject(str);
             returnValue = jsonObject.getString("result");
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -325,4 +339,6 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
 
         return countResult;
     }
+
+
 }

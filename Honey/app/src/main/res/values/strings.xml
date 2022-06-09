@@ -11,23 +11,14 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
-
-    <string name="check_internet">인터넷 연결을 확인해주세요.</string>
-    <string name="check_login">아이디 및 비밀번호를 입력해주세요</string>
-    <string name="check_id">아이디를 입력해주세요</string>
-    <string name="check_pw">비밀번호를 입력해주세요</string>
-    <string name="overlap_id">사용중인 아이디입니다</string>
-    <string name="false_login">아이디 및 비밀번호를 확인해주세요</string>
-    <string name="please_login">로그인 해주세요</string>
+    <string name="category_home">HOME</string>
+    <string name="category_korean">한식</string>
+    <string name="category_school">분식</string>
+    <string name="category_soup">탕요리</string>
+    <string name="category_instant">인스턴트</string>
+    <string name="category_dessert">디저트</string>
+    <string name="category_vegan">채식</string>
     <string name="cart_add">장바구니 담기 완료</string>
-    <string name="cart_min">최소 구매 수량입니다</string>
-    <string name="cart_max">최대 구매 수량입니다</string>
-    <string name="tip_remove">꿀팁 삭제 완료</string>
-    <string name="self_tip_remove">내가 쓴 꿀팁만 삭제 가능해요</string>
-    <string name="else_empty_check">이름, 전화번호, 이메일을 입력해주세요</string>
-    <string name="welcome">환영합니다</string>
-    <string name="join_false">오류로 인해 다시 시도해주세요</string>
-    <string name="agree_TOS">약관에 동의해주세요</string>
     <string name="info_TOS">꿀재료와 함께하시려면 \n약관에 동의 해주셔야해요 :)</string>
     <string name="first_TOS_title">[필수] 꿀재료 서비스 이용약관</string>
     <string name="second_TOS_title">[필수] 개인정보 수집 및 이용약관</string>
@@ -52,6 +43,7 @@
     <string name="delete">삭제</string>
     <string name="cancel">취소</string>
     <string name="no_buy_history">구매내역이 없습니다</string>
+    <string name="tip_info">배달팁 안내!\n\n주문금액 배달팁\n30,000원~무료배송\n10,000원~30,000원 3,000원\n*최소주문금액은 10,000원입니다.</string>
 
 
     <string name="first_TOS">제 1 조 (목적)

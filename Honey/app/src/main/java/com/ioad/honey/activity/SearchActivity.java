@@ -22,6 +22,7 @@ import com.ioad.honey.adapter.SearchAdapter;
 import com.ioad.honey.bean.Search;
 import com.ioad.honey.common.Constant;
 import com.ioad.honey.common.DBHelper;
+import com.ioad.honey.common.Util;
 import com.ioad.honey.task.SelectNetworkTask;
 
 import java.text.SimpleDateFormat;
@@ -122,7 +123,8 @@ public class SearchActivity extends AppCompatActivity {
             String searchKeyword = etSearch.getText().toString().trim();
             helper.insertSearchData("SEARCH_LIST", searchKeyword, searchDate);
         } else {
-            Toast.makeText(SearchActivity.this, "검색어를 입력해주세요", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(SearchActivity.this, "검색어를 입력해주세요", Toast.LENGTH_SHORT).show();
+            Util.showToast(SearchActivity.this, "검색어를 입력해주세요");
         }
     }
 

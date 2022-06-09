@@ -47,17 +47,7 @@ public class DeleteNetworkTask extends AsyncTask<Integer, String, Object> {
                     stringBuffer.append(strLine + "\n");
                 }
 
-//                if (where.equals("count")) {
-//                    count = parserSelectCount(stringBuffer.toString());
-//                }
-//
-//                if (where.equals("select")) {
-//                    Log.v("strLine", stringBuffer.toString());
-//                    parserSelect(stringBuffer.toString());
-//
-//                } else {
-                    result = parserAction(stringBuffer.toString()); // 리턴값을 받아야함~
-//                }
+                result = parserAction(stringBuffer.toString());
 
             }
         } catch (Exception e){
@@ -72,16 +62,7 @@ public class DeleteNetworkTask extends AsyncTask<Integer, String, Object> {
             }
         }
 
-//        if (where.equals("count")) {
-//            return count;
-//        }
-//
-//
-//        if (where.equals("select")) {
-//            return tip;
-//        } else {
-            return result;
-//        }
+        return result;
     }
 
     private String parserAction(String str){
