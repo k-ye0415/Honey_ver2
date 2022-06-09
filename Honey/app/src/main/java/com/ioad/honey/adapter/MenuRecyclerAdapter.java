@@ -27,7 +27,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
     private int layout;
     private ArrayList<Menu> data;
     private LayoutInflater inflater;
-    ImageLoadTask task;
+    private ImageLoadTask task;
 
 
     public MenuRecyclerAdapter(Context mContext, int layout, ArrayList<Menu> data) {
@@ -47,9 +47,9 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String url = Constant.SERVER_URL_IMG + data.get(position).getImage1();
-        task = new ImageLoadTask(url, holder.iv_menu);
+        task = new ImageLoadTask(url, holder.ivMenu);
         task.execute();
-        holder.tv_menu_name.setText(data.get(position).getName());
+        holder.tvMenuName.setText(data.get(position).getName());
     }
 
     @Override
@@ -59,14 +59,14 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView iv_menu;
-        public TextView tv_menu_name;
+        public ImageView ivMenu;
+        public TextView tvMenuName;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            iv_menu = itemView.findViewById(R.id.iv_menu);
-            tv_menu_name = itemView.findViewById(R.id.tv_menu_name);
+            ivMenu = itemView.findViewById(R.id.iv_menu);
+            tvMenuName = itemView.findViewById(R.id.tv_menu_name);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

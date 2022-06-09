@@ -14,9 +14,10 @@ import com.ioad.honey.task.ImageLoadTask;
 
 public class DashboardViewAdapter extends PagerAdapter {
 
+    private final String TAG = getClass().getSimpleName();
     private Context mContext;
     private String[] imageURL;
-    ImageView iv_dashboard;
+    private ImageView ivDashboard;
 
     public DashboardViewAdapter(Context mContext, String[] namesArr) {
         this.mContext = mContext;
@@ -31,7 +32,7 @@ public class DashboardViewAdapter extends PagerAdapter {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.dashborad_page, container, false);
 
-            iv_dashboard = view.findViewById(R.id.iv_dashboard);
+            ivDashboard = view.findViewById(R.id.iv_dashboard);
             getDashboardImage(imageURL[position]);
         }
 
@@ -56,7 +57,7 @@ public class DashboardViewAdapter extends PagerAdapter {
 
     public void getDashboardImage(String url) {
         String imageURL = url;
-        ImageLoadTask task = new ImageLoadTask(imageURL, iv_dashboard);
+        ImageLoadTask task = new ImageLoadTask(imageURL, ivDashboard);
         task.execute();
     }
 

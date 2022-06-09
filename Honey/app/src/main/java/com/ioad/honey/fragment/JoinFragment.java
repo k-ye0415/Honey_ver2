@@ -27,13 +27,14 @@ import java.util.ArrayList;
 
 public class JoinFragment extends Fragment {
 
-    Button btn_join_back, btn_next;
-    EditText etJoinId, etJoinPw;
-    JoinActivity joinActivity;
-    ArrayList<UserInfo> userInfos;
+    private final String TAG = getClass().getSimpleName();
+    private Button btn_join_back, btn_next;
+    private EditText etJoinId, etJoinPw;
+    private JoinActivity joinActivity;
+    private ArrayList<UserInfo> userInfos;
 
-    String joinId, joinPw;
-    String url;
+    private String joinId, joinPw;
+    private String url;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

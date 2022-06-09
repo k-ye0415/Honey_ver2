@@ -23,6 +23,7 @@ import com.ioad.honey.common.Shared;
 
 public class JoinElseFragment extends Fragment {
 
+    private final String TAG = getClass().getSimpleName();
     private EditText etJoinName, etJoinPhone, etJoinEmail;
     private Button btnJoinFinish;
     private String joinId, joinPw, joinAddr, joinAddrDetail, joinName, joinPhone, joinEmail;
@@ -58,7 +59,7 @@ public class JoinElseFragment extends Fragment {
                     url = Constant.SERVER_IP + "honey/honey_signup_j.jsp?cId=" + joinId
                             + "&cPw=" + joinPw + "&cName=" + joinName + "&cTelno=" + joinPhone
                             + "&cEmail=" + joinEmail + "&cAddress1=" + joinAddr+ "&cAddress2=" + joinAddrDetail+ "&cPostNum=" + null;
-                    Log.e("TAG", "joinURL : " + url);
+                    Log.e(TAG, "joinURL : " + url);
                     String result = insertJoinUser();
                     if (result.equals("1")) {
 //                        Toast.makeText(getActivity(), R.string.welcome, Toast.LENGTH_SHORT).show();

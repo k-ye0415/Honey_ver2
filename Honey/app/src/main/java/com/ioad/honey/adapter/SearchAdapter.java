@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class SearchAdapter extends BaseAdapter {
 
+    private final String TAG = getClass().getSimpleName();
     private Context mContext = null;
     private int layout = 0;
     private ArrayList<Search> searches = null;

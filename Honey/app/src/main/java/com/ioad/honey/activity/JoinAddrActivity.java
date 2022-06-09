@@ -41,8 +41,8 @@ public class JoinAddrActivity extends AppCompatActivity {
 //        joinId = intent.getStringExtra("JOIN_ID");
 //        joinPw = intent.getStringExtra("JOIN_PW");
 //
-//        Log.e("TAG", "joinID ::::::: " + joinId);
-//        Log.e("TAG", "joinPw ::::::: " + joinPw);
+//        Log.e(TAG, "joinID ::::::: " + joinId);
+//        Log.e(TAG, "joinPw ::::::: " + joinPw);
 
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +92,7 @@ public class JoinAddrActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     String data = intent.getExtras().getString("data");
                     if (data != null) {
-                        Log.e("TAG", data);
+                        Log.e(TAG, data);
                         address = data;
                         etJoinAddr.setText(address);
                         etJoinAddrDetail.requestFocus();

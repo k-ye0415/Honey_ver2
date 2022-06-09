@@ -53,13 +53,13 @@ public class JoinActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("TAG", "onResume pageIndex " + pageIndex);
+        Log.e(TAG, "onResume pageIndex " + pageIndex);
         Intent intent = getIntent();
         int intentInt = intent.getIntExtra("PAGE_INDEX", 1);
         if (intentInt == 1) {
             changeFragment(pageIndex);
         } else {
-            Log.e("TAG", "onResume intent " + intentInt);
+            Log.e(TAG, "onResume intent " + intentInt);
             pageIndex = intentInt;
             changeFragment(pageIndex);
         }

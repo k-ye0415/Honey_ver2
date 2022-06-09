@@ -13,9 +13,11 @@ import java.net.URL;
 
 public class DeleteNetworkTask extends AsyncTask<Integer, String, Object> {
 
-    Context mContext;
-    String urlStr;
-    String where;
+    private final String TAG = getClass().getSimpleName();
+
+    private Context mContext;
+    private String urlStr;
+    private String where;
 
     public DeleteNetworkTask(Context mContext, String urlStr, String where) {
         this.mContext = mContext;

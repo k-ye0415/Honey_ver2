@@ -20,8 +20,6 @@ public class Shared {
         JSONArray arr = new JSONArray();
         for (int i = 0; i < values.size(); i++) {
             arr.put(values.get(i));
-            Log.d("TAG", "KEY :::: " + key);
-            Log.d("TAG", "VALUE :::: " + values);
         }
 
         if (!values.isEmpty()) {
@@ -50,7 +48,7 @@ public class Shared {
 //                JSONArray array = new JSONArray(json);
 //                for (int i = 0; i < array.length(); i++) {
 //                    editor.remove(i);
-//                    Log.e("TAG", array.toString());
+//                    Log.e(TAG, array.toString());
 //                }
 //            } catch (JSONException e){
 //                e.printStackTrace();

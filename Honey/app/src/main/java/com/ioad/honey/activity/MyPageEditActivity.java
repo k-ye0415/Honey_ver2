@@ -128,7 +128,7 @@ public class MyPageEditActivity extends AppCompatActivity {
         String result = null;
         try {
             url = Constant.SERVER_IP + "honny_tip_m/mypageUpdate.jsp?" + tempURL;
-            Log.e("TAG", "update USER INFO URL :: " + url);
+            Log.e(TAG, "update USER INFO URL :: " + url);
             UpdateNetworkTask task = new UpdateNetworkTask(MyPageEditActivity.this, url, "update");
             Object obj = task.execute().get();
             result = (String) obj;
@@ -184,7 +184,7 @@ public class MyPageEditActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     String data = intent.getExtras().getString("data");
                     if (data != null) {
-                        Log.e("TAG", data);
+                        Log.e(TAG, data);
                         userAddr = data;
                         userAddrDetail = "";
                         etMyAddrDetail.requestFocus();

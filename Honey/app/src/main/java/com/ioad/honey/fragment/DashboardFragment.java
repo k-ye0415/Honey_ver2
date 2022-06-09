@@ -22,21 +22,23 @@ import java.util.TimerTask;
 
 public class DashboardFragment extends BaseFragment {
 
+    private final String TAG = getClass().getSimpleName();
+
     private ViewPager viewPager;
     private DashboardViewAdapter adapter;
     private ImageLoadTask task;
 
-    String[] imageURL = {
+    private String[] imageURL = {
             Constant.SERVER_URL_IMG +  "dashboard-1.png",
             Constant.SERVER_URL_IMG +  "dashboard-2.png",
             Constant.SERVER_URL_IMG +  "dashboard-3.png"
     };
 
-    ImageView iv_main_1, iv_main_week, iv_main_week_1, iv_main_week_2, iv_main_week_3, iv_main_event;
-    int currentPage = 0;
-    Timer timer;
-    final long DELAY_MS = 1500;//delay in milliseconds before task is to be executed
-    final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
+    private ImageView iv_main_1, iv_main_week, iv_main_week_1, iv_main_week_2, iv_main_week_3, iv_main_event;
+    private int currentPage = 0;
+    private Timer timer;
+    private final long DELAY_MS = 1500;//delay in milliseconds before task is to be executed
+    private final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

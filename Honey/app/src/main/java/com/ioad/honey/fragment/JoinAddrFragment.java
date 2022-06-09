@@ -23,7 +23,9 @@ import com.ioad.honey.task.AddressNetworkTask;
 
 public class JoinAddrFragment extends Fragment {
 
-    Button btnAddrSearch;
+    private final String TAG = getClass().getSimpleName();
+
+    private Button btnAddrSearch;
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
 
     @Override
@@ -65,7 +67,7 @@ public class JoinAddrFragment extends Fragment {
                 if (resultCode == RESULT_OK) {
                     String data = intent.getExtras().getString("data");
                     if (data != null) {
-                        Log.e("TAG", data);
+                        Log.e(TAG, data);
                     }
                 }
         }

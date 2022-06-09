@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class MySearchAdapter extends BaseAdapter {
 
+    private final String TAG = getClass().getSimpleName();
     private Context mContext;
     private int layout = 0;
     private LayoutInflater inflater;

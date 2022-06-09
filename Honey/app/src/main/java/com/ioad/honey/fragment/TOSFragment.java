@@ -19,13 +19,14 @@ import com.ioad.honey.common.Util;
 
 public class TOSFragment extends Fragment {
 
-    CheckBox cbFirst, cbSecond, cbThird, cbAll;
-    Button btnFirstTOS, btnSecondTOS, btnThirdTOS, btnTOSFinish;
-    LinearLayout firstTOS, secondTOS, thirdTOS;
-    boolean isFirst = true;
-    boolean isSecond = true;
-    boolean isThird = true;
-    boolean isAll = true;
+    private final String TAG = getClass().getSimpleName();
+    private CheckBox cbFirst, cbSecond, cbThird, cbAll;
+    private Button btnFirstTOS, btnSecondTOS, btnThirdTOS, btnTOSFinish;
+    private LinearLayout firstTOS, secondTOS, thirdTOS;
+    private boolean isFirst = true;
+    private boolean isSecond = true;
+    private boolean isThird = true;
+    private boolean isAll = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

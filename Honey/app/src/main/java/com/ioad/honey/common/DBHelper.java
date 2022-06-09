@@ -13,6 +13,7 @@ import java.util.Date;
 
 public class DBHelper extends SQLiteOpenHelper {
 
+    private final String TAG = getClass().getSimpleName();
     public static final String DATABASE = "honey.db";
     private SQLiteDatabase db;
     private Cursor cursor;
@@ -44,9 +45,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public void insertSearchData(String tableName, String search, String date) {
         db = this.getWritableDatabase();
         String insertQuery = "INSERT INTO " + tableName + " ('SEARCH_TEXT', 'SEARCH_DATE') VALUES ('" + search + "', '" + date + "');";
-        Log.e("TAG", "searchDATE : " + date);
-        Log.e("TAG", "searchKeyword : " + search);
-        Log.e("TAG", "insertQUery : " + insertQuery);
+        Log.e(TAG, "searchDATE : " + date);
+        Log.e(TAG, "searchKeyword : " + search);
+        Log.e(TAG, "insertQUery : " + insertQuery);
         db.execSQL(insertQuery);
     }
 

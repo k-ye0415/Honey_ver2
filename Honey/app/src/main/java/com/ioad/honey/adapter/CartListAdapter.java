@@ -26,14 +26,15 @@ import java.util.ArrayList;
 
 public class CartListAdapter extends BaseAdapter {
 
+    private final String TAG = getClass().getSimpleName();
     private Context mContext;
     private int layout = 0;
     private ArrayList<Cart> carts;
     private LayoutInflater inflater;
     private CartClickListener cartClickListener;
-    DecimalFormat priceFormat = new DecimalFormat("###,###");
-    int count;
-    String url;
+    private DecimalFormat priceFormat = new DecimalFormat("###,###");
+    private int count;
+    private String url;
     private ImageLoadTask task;
 
     public CartListAdapter(Context mContext, int layout, ArrayList<Cart> carts, CartClickListener cartClickListener) {
@@ -136,7 +137,7 @@ public class CartListAdapter extends BaseAdapter {
 
     private void getSetImage(String imageCode, ImageView imageView) {
         url = Constant.SERVER_URL_IMG + imageCode;
-        Log.e("TAG", url);
+        Log.e(TAG, url);
         task = new ImageLoadTask(url, imageView);
         task.execute();
     }

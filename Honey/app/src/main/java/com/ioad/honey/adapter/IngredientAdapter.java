@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.ViewHolder> {
 
+    private final String TAG = getClass().getSimpleName();
     private Context mContext = null;
     private int layout = 0;
     private ArrayList<Ingredient> ingredients = null;
@@ -41,15 +42,15 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tv_ingredient;
-        public TextView tv_ingredient_price;
-        public CheckBox chk_select;
+        public TextView tvIngredient;
+        public TextView tvIngredientPrice;
+        public CheckBox chkSelect;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_ingredient = itemView.findViewById(R.id.tv_ingredient);
-            tv_ingredient_price = itemView.findViewById(R.id.tv_ingredient_price);
-            chk_select = itemView.findViewById(R.id.chk_select);
+            tvIngredient = itemView.findViewById(R.id.tv_ingredient);
+            tvIngredientPrice = itemView.findViewById(R.id.tv_ingredient_price);
+            chkSelect = itemView.findViewById(R.id.chk_select);
         }
     }
 
@@ -72,12 +73,12 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
         String fullName = name + " " + capacity + " " + unit;
         String fullPrice = price + "원";
 
-        holder.tv_ingredient.setText(fullName);
-        holder.tv_ingredient_price.setText(fullPrice);
+        holder.tvIngredient.setText(fullName);
+        holder.tvIngredientPrice.setText(fullPrice);
 
-        holder.chk_select.setChecked(ingredients.get(position).isSelected());
-        holder.chk_select.setTag(ingredients.get(position));
-        holder.chk_select.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.chkSelect.setChecked(ingredients.get(position).isSelected());
+        holder.chkSelect.setTag(ingredients.get(position));
+        holder.chkSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 //                preferences = mContext.getSharedPreferences("checkBox", Context.MODE_PRIVATE);
@@ -112,8 +113,8 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
                 }
                 Shared.setStringArrayPref(mContext, "SELECT_CODE", selectCode);
                 Shared.setStringArrayPref(mContext, "SELECT_NAME", selectName);
-                Log.e("TAG", "adapter " + String.valueOf(selectCode));
-                Log.e("TAG", "adapter " + String.valueOf(selectName));
+                Log.e(TAG, "adapter " + String.valueOf(selectCode));
+                Log.e(TAG, "adapter " + String.valueOf(selectName));
             }
         });
 

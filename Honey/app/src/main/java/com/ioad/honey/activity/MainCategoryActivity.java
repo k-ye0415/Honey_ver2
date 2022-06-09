@@ -46,7 +46,7 @@ public class MainCategoryActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
         userId = Shared.getStringPref(mContext, "USER_ID");
-        Log.e("TAG", "user ID ::::: " + userId);
+        Log.e(TAG, "user ID ::::: " + userId);
 
         SQLiteDatabase db;
         DBHelper helper;
@@ -144,7 +144,7 @@ public class MainCategoryActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.e("TAG", "onPause");
+        Log.e(TAG, "onPause");
         task.isCancelled();
     }
 

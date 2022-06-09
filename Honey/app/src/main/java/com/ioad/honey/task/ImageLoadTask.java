@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
 
+    private final String TAG = getClass().getSimpleName();
+
     private String urlStr;
     private ImageView imageView;
     private Bitmap bitmap;

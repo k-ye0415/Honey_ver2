@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
 
-    final String TAG = getClass().getSimpleName();
+    private final String TAG = getClass().getSimpleName();
 
     private Context mContext;
     private String mAddr;

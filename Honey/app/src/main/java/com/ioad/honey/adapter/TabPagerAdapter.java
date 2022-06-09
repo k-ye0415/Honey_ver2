@@ -9,7 +9,7 @@ import com.ioad.honey.fragment.DashboardFragment;
 import com.ioad.honey.fragment.MenuFragment;
 
 public class TabPagerAdapter extends FragmentStateAdapter {
-    Fragment[] fragments = new Fragment[] {
+    private Fragment[] fragments = new Fragment[] {
             new DashboardFragment(),
             new MenuFragment("korean.png", "menu_select_koreanfood.jsp"),
             new MenuFragment("schoolfood.png", "menu_select_schoolfood.jsp"),

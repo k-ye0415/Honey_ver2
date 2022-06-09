@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class MyPageTipAdapter extends BaseAdapter {
 
+    private final String TAG = getClass().getSimpleName();
     private Context mContext;
     private int layout = 0;
     private ArrayList<Tip> tips = null;

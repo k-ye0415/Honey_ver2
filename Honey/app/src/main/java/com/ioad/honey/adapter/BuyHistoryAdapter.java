@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class BuyHistoryAdapter extends RecyclerView.Adapter<BuyHistoryAdapter.ViewHolder> {
 
+    private final String TAG = getClass().getSimpleName();
     private Context mContext;
     private int layout = 0;
     private ArrayList<BuyHistory> histories = null;

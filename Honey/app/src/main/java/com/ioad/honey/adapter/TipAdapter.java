@@ -25,17 +25,18 @@ import com.ioad.honey.common.Shared;
 import java.util.ArrayList;
 
 public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
+    private final String TAG = getClass().getSimpleName();
     private Context mContext = null;
     private int layout = 0;
     private ArrayList<Tip> tips;
     private LayoutInflater inflater;
 
-    String tipCode;
-    String userId, userName;
-    Dialog deleteDialog;
-    TextView tvDeleteContent;
-    Button btnDelete, btnCancel;
-    String url;
+    private String tipCode;
+    private String userId, userName;
+    private Dialog deleteDialog;
+    private TextView tvDeleteContent;
+    private Button btnDelete, btnCancel;
+    private String url;
 
 
     public TipAdapter(Context mContext, int layout, ArrayList<Tip> tips) {
@@ -59,9 +60,9 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
         String name = tips.get(position).getcName().substring(0,1) + "***";
 
         userName = tips.get(position).getcName();
-        holder.tv_tip_id.setText(id);
-        holder.tv_tip_name.setText(name);
-        holder.tv_tip_title.setText(tips.get(position).getTipContent());
+        holder.tvTipId.setText(id);
+        holder.tvTipName.setText(name);
+        holder.tvTipTitle.setText(tips.get(position).getTipContent());
     }
 
     @Override
@@ -70,15 +71,15 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_tip_title;
-        public TextView tv_tip_id;
-        public TextView tv_tip_name;
+        public TextView tvTipTitle;
+        public TextView tvTipId;
+        public TextView tvTipName;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tv_tip_title = itemView.findViewById(R.id.tv_tip_title);
-            tv_tip_id = itemView.findViewById(R.id.tv_tip_id);
-            tv_tip_name = itemView.findViewById(R.id.tv_tip_name);
+            tvTipTitle = itemView.findViewById(R.id.tv_tip_title);
+            tvTipId = itemView.findViewById(R.id.tv_tip_id);
+            tvTipName = itemView.findViewById(R.id.tv_tip_name);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

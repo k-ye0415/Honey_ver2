@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 public class MenuFragment extends Fragment {
 
+    private final String TAG = getClass().getSimpleName();
     private ImageLoadTask task;
     private ImageView iv_menu;
     private RecyclerView rv_menu;

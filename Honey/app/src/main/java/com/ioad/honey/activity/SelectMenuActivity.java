@@ -103,7 +103,7 @@ public class SelectMenuActivity extends AppCompatActivity {
 
             for (int i = 0; i < codeArr.size(); i++) {
                 url = Constant.SERVER_URL_JSP + "ingredient_cart_insert.jsp?id=" + userId + "&iCode=" + codeArr.get(i) + "&mCode=" + selectCode;
-                Log.d("TAG", "cart Insert url : " + url);
+                Log.d(TAG, "cart Insert url : " + url);
                 result = insertCart();
             }
 
