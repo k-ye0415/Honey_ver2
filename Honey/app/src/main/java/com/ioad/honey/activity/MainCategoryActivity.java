@@ -45,10 +45,11 @@ public class MainCategoryActivity extends AppCompatActivity {
     private TabPagerAdapter tabPagerAdapter;
     private String userId;
     private ImageLoadTask task;
-    //    private DBHelper helper;
-//    private Cursor cursor;
-//    private ArrayList<UserInfo> userInfos;
-    private SlidingPaneLayout sliding;
+    private DBHelper helper;
+    private SQLiteDatabase db;
+    private Cursor cursor;
+    private ArrayList<UserInfo> userInfos;
+    private String selectAddr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +60,14 @@ public class MainCategoryActivity extends AppCompatActivity {
         userId = Shared.getStringPref(mContext, "USER_ID");
         Log.e(TAG, "user ID ::::: " + userId);
 
-        SQLiteDatabase db;
-        DBHelper helper;
+
         helper = new DBHelper(MainCategoryActivity.this);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
         task = new ImageLoadTask();
+        userInfos = new ArrayList<>();
+        getMyAddressList();
 
         tvSelectAddr = findViewById(R.id.tv_select_addr);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -116,10 +118,9 @@ public class MainCategoryActivity extends AppCompatActivity {
         });
         getViewPager();
 
-//        sliding.setPanelStat();
 
         if (userId.length() == 0) {
-            tvSelectAddr.setText("주소지를 선택해주세요");
+            tvSelectAddr.setText(selectAddr);
         } else {
 
         }
@@ -168,18 +169,21 @@ public class MainCategoryActivity extends AppCompatActivity {
         }).attach();
     }
 
-//    private void getMyAddressList() {
-//        cursor = helper.selectAddressData("DELIVERY_ADDR");
-//        userInfos.clear();
-//        while (cursor.moveToNext()) {
-//            String addr = cursor.getString(0);
-//            String addrDetail = cursor.getString(1);
-//            String date = cursor.getString(2);
-//
-//            UserInfo userInfo = new UserInfo(addr, addrDetail, date);
-//            userInfos.add(userInfo);
-//        }
-//    }
+    private void getMyAddressList() {
+        cursor = helper.selectAddressData("DELIVERY_ADDR");
+        userInfos.clear();
+        while (cursor.moveToNext()) {
+            String addr = cursor.getString(0);
+            String addrDetail = cursor.getString(1);
+            String date = cursor.getString(2);
+
+            UserInfo userInfo = new UserInfo(addr, addrDetail, date);
+            userInfos.add(userInfo);
+        }
+
+        selectAddr = userInfos.get(0).getUserAddr();
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
