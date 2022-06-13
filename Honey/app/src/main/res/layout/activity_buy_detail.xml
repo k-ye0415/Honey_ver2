@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.BuyDetailActivity">
+
+    <Button
+        android:id="@+id/btn_buy_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="취소하기"
+        />
+    <TextView
+        android:id="@+id/tv_buy_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="주문일자"
+        />
+    <TextView
+        android:id="@+id/tv_buy_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="주문번호"
+        />
+    <TextView
+        android:id="@+id/tv_buy_addr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="주소"
+        />
+    <TextView
+        android:id="@+id/tv_buy_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="요청사항"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="주문내역"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_buy_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        >
+        <TextView
+            android:id="@+id/tv_buy_status"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"
+            android:text="주문 현황"
+            android:textSize="20dp"
+            android:layout_margin="10dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_buy_price_total"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="주문 총합"
+            android:textSize="20dp"
+            android:layout_margin="10dp"
+            android:gravity="right"
+            />
+
+    </LinearLayout>
+</LinearLayout>

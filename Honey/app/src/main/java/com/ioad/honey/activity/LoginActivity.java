@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
     private void checkLogin() {
         try {
             url = Constant.SERVER_IP +  "honey/honey_login_confirm_j.jsp?cId=" + userId + "&cPw=" + userPw;
-            SelectNetworkTask task = new SelectNetworkTask(LoginActivity.this, url, "login", "login_info");
+            SelectNetworkTask task = new SelectNetworkTask(LoginActivity.this, url, "select", "login_info");
             Object obj = task.execute().get();
             userInfos = (ArrayList<UserInfo>) obj;
 

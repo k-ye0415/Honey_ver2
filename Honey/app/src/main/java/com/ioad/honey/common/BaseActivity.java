@@ -37,10 +37,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void selectAsyncData(String url) {
-        Log.d("INSERT_URL", url);
+        Log.d("SELECT_URL", url);
     }
 
     public String insertAsyncData() {
+        String result = null;
+        return result;
+    }
+
+    public String insertAsyncData(String buyCode) {
         String result = null;
         return result;
     }

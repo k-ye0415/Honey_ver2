@@ -18,6 +18,7 @@ import android.widget.ListView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.ioad.honey.R;
 import com.ioad.honey.activity.DaumActivity;
+import com.ioad.honey.activity.JoinAddrActivity;
 import com.ioad.honey.activity.SearchActivity;
 import com.ioad.honey.adapter.AddressAdapter;
 import com.ioad.honey.bean.UserInfo;
@@ -54,9 +55,11 @@ public class AddrBottomSheet extends BottomSheetDialogFragment {
             public void onClick(View view) {
                 int status = AddressNetworkTask.getConnectivityStatus(getActivity());
                 if (status == AddressNetworkTask.TYPE_MOBILE || status == AddressNetworkTask.TYPE_WIFI) {
-                    Intent intent = new Intent(getActivity(), DaumActivity.class);
+                    Intent intent = new Intent(getActivity(), JoinAddrActivity.class);
 //                    startActivityForResult(intent, 1);
-                    getActivity().startActivityForResult(intent, 1);
+//                    getActivity().startActivityForResult(intent, 1);
+                    intent.putExtra("DELIVERY_SEARCH", true);
+                    startActivity(intent);
                 } else {
                     Util.showToast(getActivity(), "인터넷 연결을 확인해주세요");
                 }

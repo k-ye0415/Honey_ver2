@@ -48,12 +48,23 @@
         android:paddingBottom="20dp"
         android:gravity="bottom"
         >
-        <Button
-            android:id="@+id/btn_addr_next"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/next"
-            />
+            >
+            <Button
+                android:id="@+id/btn_addr_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/next"
+                />
+            <Button
+                android:id="@+id/btn_delivery_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="선택완료"
+                />
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>

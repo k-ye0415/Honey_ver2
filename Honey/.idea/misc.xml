@@ -39,7 +39,9 @@
         <entry key="app/src/main/res/drawable/textview_custom.xml" value="0.301025641025641" />
         <entry key="app/src/main/res/drawable/tip_btn_left_custom.xml" value="0.301025641025641" />
         <entry key="app/src/main/res/layout/activity_buy.xml" value="0.2368659420289855" />
+        <entry key="app/src/main/res/layout/activity_buy_detail.xml" value="0.25181159420289856" />
         <entry key="app/src/main/res/layout/activity_buy_history.xml" value="0.223731884057971" />
+        <entry key="app/src/main/res/layout/activity_buy_result.xml" value="0.24818840579710144" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/activity_daum.xml" value="0.15364583333333334" />
         <entry key="app/src/main/res/layout/activity_join.xml" value="0.27898550724637683" />

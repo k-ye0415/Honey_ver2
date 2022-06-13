@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ioad.honey.bean.BuyDetail;
 import com.ioad.honey.bean.BuyHistory;
 import com.ioad.honey.bean.Cart;
 import com.ioad.honey.bean.Ingredient;
@@ -41,6 +42,8 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
     private ArrayList<UserInfo> userInfos;
     private UserInfo userInfo;
     private ArrayList<Search> searches;
+    private ArrayList<BuyDetail> details;
+    private BuyDetail buyDetail;
     private Search search;
     private String where;
     private String kind;
@@ -74,6 +77,10 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
                 break;
             case "kfood":
                 this.searches = new ArrayList<>();
+                break;
+            case "paymentDetail_info":
+            case "buy_info":
+                this.details = new ArrayList<>();
                 break;
         }
     }
@@ -150,7 +157,12 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
             return searches;
         } else if (where.equals("select") && kind.equals("login_info")) {
             return userInfos;
-        } else {
+        } else if (where.equals("select") && kind.equals("paymentDetail_info")) {
+            return details;
+        } else if (where.equals("select") && kind.equals("buy_info")) {
+            return details;
+        }
+        else {
             return result;
         }
     }
@@ -299,6 +311,55 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
 
                         userInfo = new UserInfo(userID);
                         userInfos.add(userInfo);
+
+                    }
+                    break;
+                case "paymentDetail_info":
+                    details.clear();
+                    for (int i=0; i<jsonArray.length(); i++){
+                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+
+                        String ingredientName = jsonObject1.getString("iName");
+                        String ingredientCapacity = jsonObject1.getString("iCapacity");
+                        String ingredientUnit = jsonObject1.getString("iUnit");
+                        String ingredientPrice = jsonObject1.getString("iPrice");
+                        String menuName = jsonObject1.getString("mName");
+                        String menuImagePath = jsonObject1.getString("mImagePath");
+                        String buyPostNum = jsonObject1.getString("buyPostNum").equals("null")
+                                ? ""
+                                : jsonObject1.getString("buyPostNum");
+                        String buyAddr = jsonObject1.getString("buyAddress1");
+                        String buyAddrDetail = jsonObject1.getString("buyAddress2");
+                        String buyRequests = jsonObject1.getString("buyRequests");
+                        String buyDeliveryPrice = jsonObject1.getString("buyDeliveryPrice");
+                        int buyEA = jsonObject1.getInt("buyEA");
+                        String buyDay = jsonObject1.getString("buyDay");
+                        String buyCancelDay = jsonObject1.getString("buyCencelDay");
+
+                        buyDetail = new BuyDetail(ingredientName, ingredientCapacity, ingredientUnit, ingredientPrice,
+                                menuName, menuImagePath, buyPostNum, buyAddr, buyAddrDetail, buyRequests, buyDeliveryPrice,
+                                buyEA, buyDay, buyCancelDay);
+                        details.add(buyDetail);
+
+                    }
+                    break;
+                case "buy_info":
+                    details.clear();
+                    for (int i=0; i<jsonArray.length(); i++){
+                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+
+                        String iName = jsonObject1.getString("iName");
+                        String iCapacity = jsonObject1.getString("iCapacity");
+                        String iUnit = jsonObject1.getString("iUnit");
+                        String buyPostNum = jsonObject1.getString("buyPostNum");
+                        String buyAddress1 = jsonObject1.getString("buyAddress1");
+                        String buyAddress2 = jsonObject1.getString("buyAddress2");
+                        String buyRequests = jsonObject1.getString("buyRequests");
+                        String buyDeliveryPrice = jsonObject1.getString("buyDeliveryPrice");
+                        String count = jsonObject1.getString("count");
+
+                        buyDetail = new BuyDetail(iName, iCapacity, iUnit, buyPostNum, buyAddress1, buyAddress2, buyRequests, buyDeliveryPrice, count);
+                        details.add(buyDetail);
 
                     }
                     break;

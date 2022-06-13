@@ -119,11 +119,7 @@ public class MainCategoryActivity extends AppCompatActivity {
         getViewPager();
 
 
-        if (userId.length() == 0) {
-            tvSelectAddr.setText(selectAddr);
-        } else {
-
-        }
+        tvSelectAddr.setText(selectAddr);
 
     }
 
@@ -177,12 +173,13 @@ public class MainCategoryActivity extends AppCompatActivity {
             String addrDetail = cursor.getString(1);
             String date = cursor.getString(2);
 
-            UserInfo userInfo = new UserInfo(addr, addrDetail, date);
-            userInfos.add(userInfo);
+            if (addr != null) {
+                UserInfo userInfo = new UserInfo(addr, addrDetail, date);
+                userInfos.add(userInfo);
+            }
         }
 
-        selectAddr = userInfos.get(0).getUserAddr();
-
+        selectAddr = userInfos.size() == 0 ? "주소지를 선택해 주세요" : userInfos.get(0).getUserAddr();
     }
 
     @Override

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="request">
+        <item>문앞에 두고 벨 눌러주세요</item>
+        <item>벨 누르지 말고 노크해주세요</item>
+        <item>도착하기 전에 전화해주세요</item>
+        <item>요청사항 없음</item>
+        <item>직접 입력</item>
+    </string-array>
+</resources>

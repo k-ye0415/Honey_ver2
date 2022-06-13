@@ -55,10 +55,17 @@
             android:layout_height="wrap_content"
             android:text="요청사항"
             />
+        <Spinner
+            android:id="@+id/buy_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
         <EditText
             android:id="@+id/et_buy_request"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:hint="요청사항을 적어주세요"
             />
     </LinearLayout>
     <LinearLayout

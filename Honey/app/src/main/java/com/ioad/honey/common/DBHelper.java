@@ -45,21 +45,25 @@ public class DBHelper extends SQLiteOpenHelper {
     public void insertSearchData(String tableName, String search, String date) {
         db = this.getWritableDatabase();
         String insertQuery = "INSERT INTO " + tableName + " ('SEARCH_TEXT', 'SEARCH_DATE') VALUES ('" + search + "', '" + date + "');";
-        Log.e(TAG, "searchDATE : " + date);
-        Log.e(TAG, "searchKeyword : " + search);
-        Log.e(TAG, "insertQUery : " + insertQuery);
+        Log.e(TAG, insertQuery);
         db.execSQL(insertQuery);
     }
 
     public void insertAddressData(String tableName, String address, String addressDetail, String date) {
+        Log.d(TAG, "insertAddressData tableName " + tableName);
+        Log.d(TAG, "insertAddressData address " + address);
+        Log.d(TAG, "insertAddressData addressDetail " + addressDetail);
+        Log.d(TAG, "insertAddressData date " + date);
         db = this.getWritableDatabase();
-        String insertQuery = "INSERT INTO " + tableName + " ('ADDRESS', 'ADDRESS_DETAIL', 'INSERT_DATE') VALUES ('" + address + "', '" + addressDetail + "', " + date + "');";
+        String insertQuery = "INSERT INTO " + tableName + " ('ADDRESS', 'ADDRESS_DETAIL', 'INSERT_DATE') VALUES ('" + address + "', '" + addressDetail + "', '" + date + "');";
+        Log.e(TAG, insertQuery);
         db.execSQL(insertQuery);
     }
 
     public Cursor selectSearchData(String tableName) {
         db = this.getReadableDatabase();
         String selectQuery = "SELECT INDEX_NUM, SEARCH_TEXT,MAX(SEARCH_DATE) FROM " + tableName + " WHERE SEARCH_DELETE is NULL GROUP BY SEARCH_TEXT ORDER BY SEARCH_DATE DESC";
+        Log.e(TAG, selectQuery);
         cursor = db.rawQuery(selectQuery, null);
         return cursor;
     }
@@ -67,6 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor selectAddressData(String tableName) {
         db = this.getReadableDatabase();
         String selectQuery = "SELECT ADDRESS, ADDRESS_DETAIL, INSERT_DATE FROM " + tableName + " ORDER BY INSERT_DATE DESC LIMIT 0, 5";
+        Log.e(TAG, selectQuery);
         cursor = db.rawQuery(selectQuery, null);
         return cursor;
     }
@@ -74,6 +79,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteSearchData(String tableName, String search) {
         db = this.getWritableDatabase();
         String deleteQuery = "UPDATE " + tableName + " SET SEARCH_DELETE = '" + getTime() + "' WHERE SEARCH_TEXT = '" + search + "';";
+        Log.e(TAG, deleteQuery);
         db.execSQL(deleteQuery);
     }
 

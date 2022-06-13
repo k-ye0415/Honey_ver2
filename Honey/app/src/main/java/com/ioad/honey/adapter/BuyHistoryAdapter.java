@@ -1,6 +1,7 @@
 package com.ioad.honey.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ioad.honey.R;
+import com.ioad.honey.activity.BuyDetailActivity;
 import com.ioad.honey.bean.BuyHistory;
 
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class BuyHistoryAdapter extends RecyclerView.Adapter<BuyHistoryAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int count = Integer.parseInt(histories.get(position).getCount()) - 1;
-        holder.tvBuyNum.setText("주문번호 : " + histories.get(position).getBuyNm());
+        holder.tvBuyNum.setText("주문번호 : " + histories.get(position).getBuyCode());
         holder.tvBuyName.setText(histories.get(position).getiName() + histories.get(position).getiCapacity()
                 + histories.get(position).getiUnit() + " 외 " + count + "개");
         holder.tvBuyPrice.setText("금액 : " + histories.get(position).getBuyDeliveryPrice());
@@ -76,7 +78,12 @@ public class BuyHistoryAdapter extends RecyclerView.Adapter<BuyHistoryAdapter.Vi
                 public void onClick(View view) {
                     int position = getAdapterPosition();
 
-                    // MyPage 끝나고
+                    if (position != RecyclerView.NO_POSITION) {
+//                        Intent intent = new Intent(view.getContext(), BuyDetailActivity.class);
+//                        intent.putExtra("BUY_CODE", histories.get(position).getBuyCode());
+//                        view.getContext().startActivity(intent);
+                    }
+
                 }
             });
         }

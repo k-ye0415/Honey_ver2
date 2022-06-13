@@ -22,6 +22,12 @@
         android:theme="@style/Theme.Honey"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.BuyResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BuyDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.BuyActivity"
             android:exported="false" />
         <activity
@@ -59,8 +65,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainCategoryActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"

@@ -2,7 +2,7 @@ package com.ioad.honey.bean;
 
 public class BuyHistory {
 
-    String buyNm;
+    String buyCode;
     String buyDeliveryPrice;
     String buyDay;
     String buyCancelDay;
@@ -11,8 +11,8 @@ public class BuyHistory {
     String iUnit;
     String count;
 
-    public BuyHistory(String buyNm, String buyDeliveryPrice, String buyDay, String buyCancelDay, String iName, String iCapacity, String iUnit, String count) {
-        this.buyNm = buyNm;
+    public BuyHistory(String buyCode, String buyDeliveryPrice, String buyDay, String buyCancelDay, String iName, String iCapacity, String iUnit, String count) {
+        this.buyCode = buyCode;
         this.buyDeliveryPrice = buyDeliveryPrice;
         this.buyDay = buyDay;
         this.buyCancelDay = buyCancelDay;
@@ -23,12 +23,12 @@ public class BuyHistory {
     }
 
 
-    public String getBuyNm() {
-        return buyNm;
+    public String getBuyCode() {
+        return buyCode;
     }
 
-    public void setBuyNm(String buyNm) {
-        this.buyNm = buyNm;
+    public void setBuyCode(String buyCode) {
+        this.buyCode = buyCode;
     }
 
     public String getBuyDeliveryPrice() {
