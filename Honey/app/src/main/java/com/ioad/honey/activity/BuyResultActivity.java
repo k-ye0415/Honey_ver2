@@ -54,12 +54,12 @@ public class BuyResultActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        url = Constant.SERVER_IP + "honey/Buy_Order_Select_Info.jsp?buyNum=" + buyCode;
-        selectAsyncData(url);
+        selectAsyncData();
     }
 
     @Override
-    public void selectAsyncData(String url) {
+    public void selectAsyncData() {
+        url = Constant.SERVER_IP + "honey/Buy_Order_Select_Info.jsp?buyNum=" + buyCode;
         try {
             SelectNetworkTask task = new SelectNetworkTask(BuyResultActivity.this, url, "select", "buy_info");
             Object obj = task.execute().get();

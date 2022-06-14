@@ -49,45 +49,17 @@ public class BuyHistoryActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        url = Constant.SERVER_IP + "honey/Payment_History_Select_Info.jsp?Client_cId=" + userId;
         if (userId.length() == 0) {
             llHistoryList.setVisibility(View.INVISIBLE);
             llHistoryEmpty.setVisibility(View.VISIBLE);
         } else {
-            selectAsyncData(url);
+            selectAsyncData();
         }
     }
 
-//    private void selectGetData() {
-//        try {
-//            url = Constant.SERVER_IP + "honey/Payment_History_Select_Info.jsp?Client_cId=" + userId;
-//
-//            SelectNetworkTask task = new SelectNetworkTask(BuyHistoryActivity.this, url, "select", "paymentHistory_info");
-//            Object obj = task.execute().get();
-//            histories = (ArrayList<BuyHistory>) obj;
-//
-//            if (histories.isEmpty()) {
-//                llHistoryList.setVisibility(View.INVISIBLE);
-//                llHistoryEmpty.setVisibility(View.VISIBLE);
-//            } else {
-//                llHistoryList.setVisibility(View.VISIBLE);
-//                llHistoryEmpty.setVisibility(View.INVISIBLE);
-//
-//                layoutManager = new LinearLayoutManager(BuyHistoryActivity.this);
-//                rvHistoryList.setLayoutManager(layoutManager);
-//                adapter = new BuyHistoryAdapter(BuyHistoryActivity.this, R.layout.buy_history_list_layout, histories);
-//                rvHistoryList.setAdapter(adapter);
-//            }
-//
-//
-//        } catch (Exception e) {
-//
-//        }
-//    }
-
     @Override
-    public void selectAsyncData(String url) {
-        super.selectAsyncData(url);
+    public void selectAsyncData() {
+        url = Constant.SERVER_IP + "honey/Payment_History_Select_Info.jsp?Client_cId=" + userId;
         try {
             SelectNetworkTask task = new SelectNetworkTask(BuyHistoryActivity.this, url, "select", "paymentHistory_info");
             Object obj = task.execute().get();

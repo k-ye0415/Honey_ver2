@@ -75,6 +75,21 @@ public class BuyActivity extends BaseActivity {
         Log.e(TAG, "total price " + totalPrice);
         userId = Shared.getStringPref(BuyActivity.this, "USER_ID");
 
+        setActivityView();
+
+        btnBuySearch.setOnClickListener(btnOnClickListener);
+        btnGoBuy.setOnClickListener(btnOnClickListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        selectSQLite();
+    }
+
+    @Override
+    public void setActivityView() {
+        super.setActivityView();
         adapter = ArrayAdapter.createFromResource(this, R.array.request, android.R.layout.simple_spinner_dropdown_item);
         buySpinner.setAdapter(adapter);
         buySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -107,18 +122,11 @@ public class BuyActivity extends BaseActivity {
             tvBuyTip.setText("무료배송");
         }
 
-        btnBuySearch.setOnClickListener(btnOnClickListener);
-        btnGoBuy.setOnClickListener(btnOnClickListener);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        getMyAddressList();
-    }
-
-
-    private void getMyAddressList() {
+    public void selectSQLite() {
+        super.selectSQLite();
         cursor = helper.selectAddressData("DELIVERY_ADDR");
         userInfos.clear();
         while (cursor.moveToNext()) {
@@ -138,6 +146,30 @@ public class BuyActivity extends BaseActivity {
         } else {
 
         }
+    }
+
+    @Override
+    public String insertAsyncData(String buyCode) {
+
+        url = Constant.SERVER_IP + "honey/Buy_Order_Insert_Return.jsp?"
+                + "Client_cId=" + userId
+                + "&buyNum=" + buyCode
+                + "&buyPostNum=" + null
+                + "&buyAddress1=" + etBuyAddr.getText()
+                + "&buyAddress2=" + etBuyAddrDetail.getText()
+                + "&buyRequests=" + requestStr
+                + "&buyDeliveryPrice=" + tvBuyTot.getText();
+        Log.e(TAG, url);
+        String result = null;
+        try {
+            InsertNetworkTask task = new InsertNetworkTask(BuyActivity.this, url, "insert");
+            Object obj = task.execute().get();
+            result = (String) obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
 
@@ -183,27 +215,5 @@ public class BuyActivity extends BaseActivity {
     }
 
 
-    @Override
-    public String insertAsyncData(String buyCode) {
 
-        url = Constant.SERVER_IP + "honey/Buy_Order_Insert_Return.jsp?"
-                + "Client_cId=" + userId
-                + "&buyNum=" + buyCode
-                + "&buyPostNum=" + null
-                + "&buyAddress1=" + etBuyAddr.getText()
-                + "&buyAddress2=" + etBuyAddrDetail.getText()
-                + "&buyRequests=" + requestStr
-                + "&buyDeliveryPrice=" + tvBuyTot.getText();
-        Log.e(TAG, url);
-        String result = null;
-        try {
-            InsertNetworkTask task = new InsertNetworkTask(BuyActivity.this, url, "insert");
-            Object obj = task.execute().get();
-            result = (String) obj;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
-    }
 }

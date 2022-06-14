@@ -45,14 +45,13 @@ public class BuyDetailActivity extends BaseActivity {
 
         details = new ArrayList<>();
 
-        url = Constant.SERVER_IP + "honey/Payment_Detail_All_List.jsp?buyNum=" + buyCode;
-        selectAsyncData(url);
+        selectAsyncData();
 
     }
 
     @Override
-    public void selectAsyncData(String url) {
-        super.selectAsyncData(url);
+    public void selectAsyncData() {
+        url = Constant.SERVER_IP + "honey/Payment_Detail_All_List.jsp?buyNum=" + buyCode;
         try {
             SelectNetworkTask task = new SelectNetworkTask(BuyDetailActivity.this, url, "select", "paymentDetail_info");
             Object obj = task.execute().get();

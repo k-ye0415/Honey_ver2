@@ -54,35 +54,7 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
         this.where = where;
         this.kind = kind;
 
-        switch (this.kind) {
-            case "tip":
-            case "MypageCart":
-                this.tips = new ArrayList<>();
-                break;
-            case "food":
-                this.menus = new ArrayList<>();
-                break;
-            case "ingredient":
-                this.ingredients = new ArrayList<>();
-                break;
-            case "carts_info":
-                this.carts = new ArrayList<>();
-                break;
-            case "paymentHistory_info":
-                this.histories = new ArrayList<>();
-                break;
-            case "myPage":
-            case "login_info":
-                this.userInfos = new ArrayList<>();
-                break;
-            case "kfood":
-                this.searches = new ArrayList<>();
-                break;
-            case "paymentDetail_info":
-            case "buy_info":
-                this.details = new ArrayList<>();
-                break;
-        }
+        init(this.kind);
     }
 
     @Override
@@ -370,6 +342,42 @@ public class SelectNetworkTask extends AsyncTask<Integer, String, Object> {
             e.printStackTrace();
         }
     }
+
+
+    private void init(String kind) {
+        Log.e("SELECT_URL", this.mAddr);
+        switch (kind) {
+            case "tip":
+            case "MypageCart":
+                this.tips = new ArrayList<>();
+                break;
+            case "food":
+                this.menus = new ArrayList<>();
+                break;
+            case "ingredient":
+                this.ingredients = new ArrayList<>();
+                break;
+            case "carts_info":
+                this.carts = new ArrayList<>();
+                break;
+            case "paymentHistory_info":
+                this.histories = new ArrayList<>();
+                break;
+            case "myPage":
+            case "login_info":
+                this.userInfos = new ArrayList<>();
+                break;
+            case "kfood":
+                this.searches = new ArrayList<>();
+                break;
+            case "paymentDetail_info":
+            case "buy_info":
+                this.details = new ArrayList<>();
+                break;
+        }
+    }
+
+
 
     private String parserAction(String str) {
         String returnValue = null;

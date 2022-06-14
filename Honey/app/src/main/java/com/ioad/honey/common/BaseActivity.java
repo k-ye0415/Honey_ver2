@@ -36,9 +36,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public void selectAsyncData(String url) {
-        Log.d("SELECT_URL", url);
+    public void setActivityView(){
+
     }
+
+    public void selectAsyncData() {}
 
     public String insertAsyncData() {
         String result = null;
@@ -59,6 +61,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         String result = null;
         return result;
     }
+
+    public void selectSQLite(){}
+    public void insertSQLite(){}
+    public void updateSQLite(){}
+    public void deleteSQLite(){}
+
+
 
     public void imageAsync(String imageCode, ImageView imageView) {
     }
