@@ -7,8 +7,7 @@ import androidx.fragment.app.Fragment;
 
 public abstract class BaseFragment extends Fragment {
 
-    public void selectAsyncData(String url){
-        Log.d("INSERT_URL", url);
+    public void selectAsyncData(){
     }
     public String insertAsyncData() {
         String result = null;

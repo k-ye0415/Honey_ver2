@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -13,16 +14,17 @@ import android.widget.TextView;
 import com.ioad.honey.adapter.TipAdapter;
 import com.ioad.honey.bean.Tip;
 import com.ioad.honey.R;
+import com.ioad.honey.common.BaseActivity;
 import com.ioad.honey.task.ImageLoadTask;
 import com.ioad.honey.task.SelectNetworkTask;
 import com.ioad.honey.common.Constant;
 
 import java.util.ArrayList;
 
-public class TipActivity extends AppCompatActivity {
+public class TipActivity extends BaseActivity {
 
     private final String TAG = getClass().getSimpleName();
-
+    private Context mContext;
     private ImageView ivTipMenu, ivTipTitle;
     private TextView tvTipName;
     private RecyclerView rvTipList;
@@ -41,6 +43,8 @@ public class TipActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tip);
 
+        mContext = TipActivity.this;
+
         ivTipMenu = findViewById(R.id.iv_tip_menu);
         ivTipTitle = findViewById(R.id.iv_tip_title);
         tvTipName = findViewById(R.id.tv_tip_name);
@@ -52,19 +56,27 @@ public class TipActivity extends AppCompatActivity {
         selectCode = intent.getStringExtra("mCode");
         selectName = intent.getStringExtra("mName");
 
-        tvTipName.setText(selectName);
-        getImage(selectCode, ivTipMenu);
-        getImage(null, ivTipTitle);
+        setActivityView();
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getTipList();
+        selectAsyncData();
     }
 
-    public void getImage(String imageCode, ImageView imageView) {
+    @Override
+    public void setActivityView() {
+        tvTipName.setText(selectName);
+//        getImage(selectCode, ivTipMenu);
+//        getImage(null, ivTipTitle);
+        imageAsync(selectCode, ivTipMenu);
+        imageAsync(null, ivTipTitle);
+    }
+
+    @Override
+    public void imageAsync(String imageCode, ImageView imageView) {
         String url = "";
         if (imageCode != null) {
             url = Constant.SERVER_URL_IMG + "foodcode" + imageCode + ".png";
@@ -75,17 +87,17 @@ public class TipActivity extends AppCompatActivity {
         task.execute();
     }
 
-
-    private void getTipList() {
+    @Override
+    public void selectAsyncData() {
         strUrl = Constant.SERVER_URL_JSP + "tip_select.jsp?mCode=" + selectCode;
         try {
-            SelectNetworkTask networkTask = new SelectNetworkTask(TipActivity.this, strUrl, "select", "tip");
+            SelectNetworkTask networkTask = new SelectNetworkTask(mContext, strUrl, "select", "tip");
             Object obj = networkTask.execute().get();
             tips = (ArrayList<Tip>) obj;
-            layoutManager = new LinearLayoutManager(TipActivity.this);
+            layoutManager = new LinearLayoutManager(mContext);
             rvTipList.setLayoutManager(layoutManager);
 
-            adapter = new TipAdapter(TipActivity.this, R.layout.tip_item, tips);
+            adapter = new TipAdapter(mContext, R.layout.tip_item, tips);
             rvTipList.setAdapter(adapter);
 
 
@@ -93,4 +105,22 @@ public class TipActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+//    private void getTipList() {
+//        strUrl = Constant.SERVER_URL_JSP + "tip_select.jsp?mCode=" + selectCode;
+//        try {
+//            SelectNetworkTask networkTask = new SelectNetworkTask(TipActivity.this, strUrl, "select", "tip");
+//            Object obj = networkTask.execute().get();
+//            tips = (ArrayList<Tip>) obj;
+//            layoutManager = new LinearLayoutManager(TipActivity.this);
+//            rvTipList.setLayoutManager(layoutManager);
+//
+//            adapter = new TipAdapter(TipActivity.this, R.layout.tip_item, tips);
+//            rvTipList.setAdapter(adapter);
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

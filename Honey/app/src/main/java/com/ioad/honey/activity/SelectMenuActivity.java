@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.ioad.honey.adapter.IngredientAdapter;
 import com.ioad.honey.bean.Ingredient;
 import com.ioad.honey.R;
+import com.ioad.honey.common.BaseActivity;
 import com.ioad.honey.common.Util;
 import com.ioad.honey.task.ImageLoadTask;
 import com.ioad.honey.task.InsertNetworkTask;
@@ -26,10 +28,10 @@ import com.ioad.honey.common.Shared;
 
 import java.util.ArrayList;
 
-public class SelectMenuActivity extends AppCompatActivity {
+public class SelectMenuActivity extends BaseActivity {
 
     private final String TAG = getClass().getSimpleName();
-
+    private Context mContext;
     private ImageView ivSelectNenu;
     private TextView tvSelectName, tvTipCount, tvTip;
     private RecyclerView rvSelectMenu;
@@ -50,6 +52,7 @@ public class SelectMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_menu);
 
         userId = Shared.getStringPref(SelectMenuActivity.this, "USER_ID");
+        mContext = SelectMenuActivity.this;
 
         ivSelectNenu = findViewById(R.id.iv_select_menu);
         tvSelectName = findViewById(R.id.tv_select_name);
@@ -63,11 +66,11 @@ public class SelectMenuActivity extends AppCompatActivity {
         selectCode = intent.getStringExtra("mCode");
         selectName = intent.getStringExtra("mName");
 
-        getSelectImage(selectCode, ivSelectNenu);
+        imageAsync(selectCode, ivSelectNenu);
         tvSelectName.setText(selectName);
 
-        tipCount = tipCount();
-        tvTipCount.setText("꿀팁 " + tipCount + "건");
+//        tipCount = tipCount();
+//        tvTipCount.setText("꿀팁 " + tipCount + "건");
         tvTip.setOnClickListener(tipOnClickListener);
         btnCart.setOnClickListener(cartOnClickListener);
     }
@@ -76,16 +79,28 @@ public class SelectMenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        tipCount = tipCount();
+        tipCount = selectAsyncResult();
         tvTipCount.setText("꿀팁 " + tipCount + "건");
 
-        getListData();
+        selectAsyncData();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        task.cancel(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        task.cancel(true);
     }
 
     View.OnClickListener tipOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(SelectMenuActivity.this, TipActivity.class);
+            Intent intent = new Intent(mContext, TipActivity.class);
             intent.putExtra("mCode", selectCode);
             intent.putExtra("mName", selectName);
             startActivity(intent);
@@ -98,43 +113,50 @@ public class SelectMenuActivity extends AppCompatActivity {
             String result = null;
             ArrayList<String> codeArr = new ArrayList<>();
             ArrayList<String> nameArr = new ArrayList<>();
-            codeArr = Shared.getStringArrayPref(SelectMenuActivity.this, "SELECT_CODE");
-            nameArr = Shared.getStringArrayPref(SelectMenuActivity.this, "SELECT_NAME");
+            codeArr = Shared.getStringArrayPref(mContext, "SELECT_CODE");
+            nameArr = Shared.getStringArrayPref(mContext, "SELECT_NAME");
 
             for (int i = 0; i < codeArr.size(); i++) {
                 url = Constant.SERVER_URL_JSP + "ingredient_cart_insert.jsp?id=" + userId + "&iCode=" + codeArr.get(i) + "&mCode=" + selectCode;
                 Log.d(TAG, "cart Insert url : " + url);
-                result = insertCart();
+                result = insertAsyncData();
             }
 
             if (result.equals("1")) {
                 if (codeArr.size() == 1) {
-//                    Toast.makeText(SelectMenuActivity.this, "장바구니 담기 완료", Toast.LENGTH_SHORT).show();
-                    Util.showToast(SelectMenuActivity.this, "장바구니 담기 완료");
+//                    Toast.makeText(mContext, "장바구니 담기 완료", Toast.LENGTH_SHORT).show();
+                    Util.showToast(mContext, "장바구니 담기 완료");
                 } else {
-//                    Toast.makeText(SelectMenuActivity.this, nameArr.get(0) + "외 " + codeArr.size() + "장바구니 담기 완료", Toast.LENGTH_SHORT).show();
-                    Util.showToast(SelectMenuActivity.this, nameArr.get(0) + "외 " + codeArr.size() + "장바구니 담기 완료");
+//                    Toast.makeText(mContext, nameArr.get(0) + "외 " + codeArr.size() + "장바구니 담기 완료", Toast.LENGTH_SHORT).show();
+                    Util.showToast(mContext, nameArr.get(0) + "외 " + codeArr.size() + "장바구니 담기 완료");
                 }
-                Shared.removeStringArrayPref(SelectMenuActivity.this, "SELECT_CODE");
-                Shared.removeStringArrayPref(SelectMenuActivity.this, "SELECT_NAME");
+                Shared.removeStringArrayPref(mContext, "SELECT_CODE");
+                Shared.removeStringArrayPref(mContext, "SELECT_NAME");
             }
 
         }
     };
 
-
-    public void getSelectImage(String imageCode, ImageView imageView) {
+    @Override
+    public void imageAsync(String imageCode, ImageView imageView) {
         String url = Constant.SERVER_URL_IMG + "foodcode" + imageCode + "-1.png";
         task = new ImageLoadTask(url, imageView);
         task.execute();
     }
 
+//    public void getSelectImage(String imageCode, ImageView imageView) {
+//        String url = Constant.SERVER_URL_IMG + "foodcode" + imageCode + "-1.png";
+//        task = new ImageLoadTask(url, imageView);
+//        task.execute();
+//    }
 
-    private String tipCount(){
+
+    @Override
+    public String selectAsyncResult() {
         String count = null;
         url = Constant.SERVER_URL_JSP + "tip_count_select.jsp?code=" + selectCode;
         try {
-            SelectNetworkTask networkTask = new SelectNetworkTask(SelectMenuActivity.this, url, "count", "tip");
+            SelectNetworkTask networkTask = new SelectNetworkTask(mContext, url, "count", "tip");
             Object obj = networkTask.execute().get();
 
             count = (String) obj;
@@ -145,7 +167,8 @@ public class SelectMenuActivity extends AppCompatActivity {
         return count;
     }
 
-    private void getListData() {
+    @Override
+    public void selectAsyncData() {
         url = Constant.SERVER_URL_JSP + "menu_select_ingredient.jsp?code=" + selectCode;
         try {
             SelectNetworkTask networkTask = new SelectNetworkTask(this, url, "select", "ingredient");
@@ -163,11 +186,11 @@ public class SelectMenuActivity extends AppCompatActivity {
         }
     }
 
-
-    private String insertCart() {
+    @Override
+    public String insertAsyncData() {
         String result = null;
         try {
-            InsertNetworkTask task = new InsertNetworkTask(SelectMenuActivity.this, url, "insert");
+            InsertNetworkTask task = new InsertNetworkTask(mContext, url, "insert");
             Object obj = task.execute().get();
             result = (String) obj;
         } catch (Exception e) {
@@ -175,6 +198,52 @@ public class SelectMenuActivity extends AppCompatActivity {
         }
         return result;
     }
+
+    //    private String tipCount(){
+//        String count = null;
+//        url = Constant.SERVER_URL_JSP + "tip_count_select.jsp?code=" + selectCode;
+//        try {
+//            SelectNetworkTask networkTask = new SelectNetworkTask(SelectMenuActivity.this, url, "count", "tip");
+//            Object obj = networkTask.execute().get();
+//
+//            count = (String) obj;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return count;
+//    }
+
+//    private void getListData() {
+//        url = Constant.SERVER_URL_JSP + "menu_select_ingredient.jsp?code=" + selectCode;
+//        try {
+//            SelectNetworkTask networkTask = new SelectNetworkTask(this, url, "select", "ingredient");
+//            Object obj = networkTask.execute().get();
+//            ingredients = (ArrayList<Ingredient>) obj;
+//
+//            layoutManager = new LinearLayoutManager(this);
+//            rvSelectMenu.setLayoutManager(layoutManager);
+//
+//            adapter = new IngredientAdapter(this, R.layout.ingredient_list_layout, ingredients);
+//            rvSelectMenu.setAdapter(adapter);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
+//    private String insertCart() {
+//        String result = null;
+//        try {
+//            InsertNetworkTask task = new InsertNetworkTask(SelectMenuActivity.this, url, "insert");
+//            Object obj = task.execute().get();
+//            result = (String) obj;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return result;
+//    }
 
 
 }

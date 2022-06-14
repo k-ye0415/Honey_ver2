@@ -50,10 +50,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void insertAddressData(String tableName, String address, String addressDetail, String date) {
-        Log.d(TAG, "insertAddressData tableName " + tableName);
-        Log.d(TAG, "insertAddressData address " + address);
-        Log.d(TAG, "insertAddressData addressDetail " + addressDetail);
-        Log.d(TAG, "insertAddressData date " + date);
         db = this.getWritableDatabase();
         String insertQuery = "INSERT INTO " + tableName + " ('ADDRESS', 'ADDRESS_DETAIL', 'INSERT_DATE') VALUES ('" + address + "', '" + addressDetail + "', '" + date + "');";
         Log.e(TAG, insertQuery);

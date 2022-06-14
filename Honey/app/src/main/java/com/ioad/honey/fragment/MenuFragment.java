@@ -14,13 +14,14 @@ import android.widget.ImageView;
 import com.ioad.honey.adapter.MenuAdapter;
 import com.ioad.honey.bean.Menu;
 import com.ioad.honey.R;
+import com.ioad.honey.common.BaseFragment;
 import com.ioad.honey.task.ImageLoadTask;
 import com.ioad.honey.task.SelectNetworkTask;
 import com.ioad.honey.common.Constant;
 
 import java.util.ArrayList;
 
-public class MenuFragment extends Fragment {
+public class MenuFragment extends BaseFragment {
 
     private final String TAG = getClass().getSimpleName();
     private ImageLoadTask task;
@@ -45,19 +46,21 @@ public class MenuFragment extends Fragment {
         iv_menu = view.findViewById(R.id.iv_menu);
         rv_menu = view.findViewById(R.id.rv_menu);
 
-        getKoreanImage(name, iv_menu);
-        getListData();
+        imageAsync(name, iv_menu);
+        selectAsyncData();
 
         return view;
     }
 
-    public void getKoreanImage(String imageNm, ImageView imageView) {
-        String url = Constant.SERVER_URL_IMG + imageNm;
+    @Override
+    public void imageAsync(String imageCode, ImageView imageView) {
+        String url = Constant.SERVER_URL_IMG + imageCode;
         task = new ImageLoadTask(url, imageView);
         task.execute();
     }
 
-    private void getListData() {
+    @Override
+    public void selectAsyncData() {
         try {
             SelectNetworkTask networkTask = new SelectNetworkTask(getActivity(), JSPUrl, "select", "food");
             Object obj = networkTask.execute().get();
@@ -73,4 +76,27 @@ public class MenuFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    //    public void getKoreanImage(String imageNm, ImageView imageView) {
+//        String url = Constant.SERVER_URL_IMG + imageNm;
+//        task = new ImageLoadTask(url, imageView);
+//        task.execute();
+//    }
+
+//    private void getListData() {
+//        try {
+//            SelectNetworkTask networkTask = new SelectNetworkTask(getActivity(), JSPUrl, "select", "food");
+//            Object obj = networkTask.execute().get();
+//            menus = (ArrayList<Menu>) obj;
+//
+//            layoutManager = new LinearLayoutManager(getActivity());
+//            rv_menu.setLayoutManager(layoutManager);
+//
+//            adapter = new MenuAdapter(getActivity(), R.layout.menu_layout, menus);
+//            rv_menu.setAdapter(adapter);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

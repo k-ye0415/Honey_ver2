@@ -2,6 +2,7 @@ package com.ioad.honey.task;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -23,6 +24,7 @@ public class DeleteNetworkTask extends AsyncTask<Integer, String, Object> {
         this.mContext = mContext;
         this.urlStr = urlStr;
         this.where = where;
+        Log.e("DELETED_URL", this.urlStr);
     }
 
     @Override

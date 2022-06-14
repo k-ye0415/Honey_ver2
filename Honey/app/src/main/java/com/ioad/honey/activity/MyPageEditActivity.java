@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,15 +17,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ioad.honey.R;
+import com.ioad.honey.common.BaseActivity;
 import com.ioad.honey.common.Constant;
 import com.ioad.honey.common.Shared;
 import com.ioad.honey.common.Util;
 import com.ioad.honey.task.AddressNetworkTask;
 import com.ioad.honey.task.UpdateNetworkTask;
 
-public class MyPageEditActivity extends AppCompatActivity {
+public class MyPageEditActivity extends BaseActivity {
 
     private final String TAG = getClass().getSimpleName();
+    private Context mContext;
 
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
     private EditText etMyId, etMyPw, etMyName, etMyPhone, etMyPost, etMyAddr, etMyAddrDetail, etMyEmail;
@@ -39,7 +42,8 @@ public class MyPageEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page_edit);
 
-        userId = Shared.getStringPref(MyPageEditActivity.this, "USER_ID");
+        mContext = MyPageEditActivity.this;
+        userId = Shared.getStringPref(mContext, "USER_ID");
 
         etMyId = findViewById(R.id.et_my_id);
         etMyPw = findViewById(R.id.et_my_pw);
@@ -85,13 +89,13 @@ public class MyPageEditActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.btn_edit_addr_search:
-                    int status = AddressNetworkTask.getConnectivityStatus(MyPageEditActivity.this);
+                    int status = AddressNetworkTask.getConnectivityStatus(mContext);
                     if (status == AddressNetworkTask.TYPE_MOBILE || status == AddressNetworkTask.TYPE_WIFI) {
-                        Intent intent = new Intent(MyPageEditActivity.this, DaumActivity.class);
+                        Intent intent = new Intent(mContext, DaumActivity.class);
                         startActivityForResult(intent, SEARCH_ADDRESS_ACTIVITY);
                     } else {
-//                        Toast.makeText(MyPageEditActivity.this, R.string.check_internet, Toast.LENGTH_SHORT).show();
-                        Util.showToast(MyPageEditActivity.this, "인터넷 연결을 확인해주세요");
+//                        Toast.makeText(mContext, R.string.check_internet, Toast.LENGTH_SHORT).show();
+                        Util.showToast(mContext, "인터넷 연결을 확인해주세요");
                         finish();
                     }
                     break;
@@ -110,10 +114,10 @@ public class MyPageEditActivity extends AppCompatActivity {
                             + "&userAddress2=" + userAddrDetail
                             + "&userEmail=" + userEmail
                             + "&userId=" + userId;
-                    String result = updateUserInfo(tempURL);
+                    String result = updateAsyncData(tempURL);
                     if (result.equals("1")) {
-//                        Toast.makeText(MyPageEditActivity.this, "수정 완료 되었습니다", Toast.LENGTH_SHORT).show();
-                        Util.showToast(MyPageEditActivity.this, "수정 완료 되었습니다");
+//                        Toast.makeText(mContext, "수정 완료 되었습니다", Toast.LENGTH_SHORT).show();
+                        Util.showToast(mContext, "수정 완료 되었습니다");
                     }
                     break;
                 case R.id.btn_logout:
@@ -124,12 +128,13 @@ public class MyPageEditActivity extends AppCompatActivity {
     };
 
 
-    private String updateUserInfo(String tempURL) {
+    @Override
+    public String updateAsyncData(String tempURL) {
         String result = null;
         try {
             url = Constant.SERVER_IP + "honny_tip_m/mypageUpdate.jsp?" + tempURL;
             Log.e(TAG, "update USER INFO URL :: " + url);
-            UpdateNetworkTask task = new UpdateNetworkTask(MyPageEditActivity.this, url, "update");
+            UpdateNetworkTask task = new UpdateNetworkTask(mContext, url, "update");
             Object obj = task.execute().get();
             result = (String) obj;
         } catch (Exception e) {
@@ -138,9 +143,23 @@ public class MyPageEditActivity extends AppCompatActivity {
         return result;
     }
 
+//    private String updateUserInfo(String tempURL) {
+//        String result = null;
+//        try {
+//            url = Constant.SERVER_IP + "honny_tip_m/mypageUpdate.jsp?" + tempURL;
+//            Log.e(TAG, "update USER INFO URL :: " + url);
+//            UpdateNetworkTask task = new UpdateNetworkTask(mContext, url, "update");
+//            Object obj = task.execute().get();
+//            result = (String) obj;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return result;
+//    }
+
 
     private void logoutDialog(){
-        logoutDialog = new Dialog(MyPageEditActivity.this);
+        logoutDialog = new Dialog(mContext);
         logoutDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         logoutDialog.setContentView(R.layout.logout_dialog);
 
@@ -166,11 +185,11 @@ public class MyPageEditActivity extends AppCompatActivity {
         btnDaiLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyPageEditActivity.this, MainCategoryActivity.class);
-                Shared.removeStringPrf(MyPageEditActivity.this, "USER_ID");
+                Intent intent = new Intent(mContext, MainCategoryActivity.class);
+                Shared.removeStringPrf(mContext, "USER_ID");
                 startActivity(intent);
-//                Toast.makeText(MyPageEditActivity.this, "로그아웃 완료. 다음에 만나요~", Toast.LENGTH_SHORT).show();
-                Util.showToast(MyPageEditActivity.this, "로그아웃 완료. 다음에 만나요~");
+//                Toast.makeText(mContext, "로그아웃 완료. 다음에 만나요~", Toast.LENGTH_SHORT).show();
+                Util.showToast(mContext, "로그아웃 완료. 다음에 만나요~");
             }
         });
     }
