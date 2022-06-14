@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/drawable-v24/cart_alldel_btn.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/drawable/button_add_custom.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/drawable/search_background_custom.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/drawable/search_edit_custom.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/layout/activity_buy.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/layout/activity_buy_history.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/layout/activity_cart.xml" value="0.36614583333333334" />
@@ -21,6 +25,7 @@
         <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/layout/address_list_item.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/layout/buy_history_list_layout.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/layout/cart_list_layout.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/layout/dailog_layout.xml" value="0.29708222811671087" />
         <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/layout/dashborad_page.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/layout/fragment_addr_bottom_sheet.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/user19/yejin/HomeStudy/Honey_ver2/Honey/app/src/main/res/layout/fragment_dashboard.xml" value="0.36614583333333334" />

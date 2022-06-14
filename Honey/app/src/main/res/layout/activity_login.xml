@@ -37,12 +37,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         >
         <TextView
             android:id="@+id/tv_id_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/find_id"
+            android:layout_marginRight="20dp"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -54,6 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/find_pw"
+            android:layout_marginLeft="20dp"
             />
     </LinearLayout>
     <LinearLayout
@@ -67,5 +70,17 @@
             android:text="@string/join"
             />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <Button
+            android:id="@+id/btn_kakao_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="KAKAO"
+            />
+    </LinearLayout>
+
 
 </LinearLayout>

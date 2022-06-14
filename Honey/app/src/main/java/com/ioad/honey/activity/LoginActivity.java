@@ -1,9 +1,11 @@
 package com.ioad.honey.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,11 +15,14 @@ import android.widget.Toast;
 
 import com.ioad.honey.bean.UserInfo;
 import com.ioad.honey.R;
+import com.ioad.honey.common.SessionCallback;
 import com.ioad.honey.common.Util;
 import com.ioad.honey.task.LoginNetworkTask;
 import com.ioad.honey.common.Constant;
 import com.ioad.honey.common.Shared;
 import com.ioad.honey.task.SelectNetworkTask;
+import com.kakao.auth.AuthType;
+import com.kakao.auth.Session;
 
 import java.util.ArrayList;
 
@@ -25,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
 
-    private Button btnLogin, btnJoin;
+    private Button btnLogin, btnJoin, btnKakao;
     private ImageButton btnLoginBack;
     private EditText etLoginId, etLoginPw;
     private TextView tvIdSearch, tvPwSearch;
@@ -34,6 +39,9 @@ public class LoginActivity extends AppCompatActivity {
     private String userId;
     private String userPw;
     private ArrayList<UserInfo> userInfos;
+
+    private SessionCallback sessionCallback = new SessionCallback();
+    Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,29 @@ public class LoginActivity extends AppCompatActivity {
         etLoginPw = findViewById(R.id.et_login_pw);
         tvIdSearch = findViewById(R.id.tv_id_search);
         tvPwSearch = findViewById(R.id.tv_pw_search);
+        btnKakao = findViewById(R.id.btn_kakao_login);
+
+
+        session = Session.getCurrentSession();
+        session.addCallback(sessionCallback);
+
+        btnKakao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Session.getCurrentSession().checkAndImplicitOpen()) {
+                    Log.d(TAG, "onClick: 로그인 세션살아있음");
+                    // 카카오 로그인 시도 (창이 안뜬다.)
+                    sessionCallback.requestMe();
+                } else {
+                    Log.d(TAG, "onClick: 로그인 세션끝남");
+                    // 카카오 로그인 시도 (창이 뜬다.)
+                    session.open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
+                }
+            }
+        });
+
+
+
 
         btnLoginBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,5 +135,20 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+        Session.getCurrentSession().removeCallback(sessionCallback);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, intent)) {
+            String data = intent.getExtras().getString("data");
+            Log.e(TAG, "onActivityResult " + data);
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, intent);
+    }
 }
